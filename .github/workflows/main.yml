@@ -35,7 +35,7 @@ jobs:
           # ftp username
           username: devops@tweak.ch
           # ftp password
-          password: 49HCNcbewxwp*kcH6Bqc
+          password: ${{ secrets.DEVOPS_PASSWORD }}
           # Server port to connect to (read your web hosts docs)
           #port: # optional
           # protocol to deploy with - ftp, ftps, or ftps-legacy
