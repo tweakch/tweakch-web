@@ -1,6 +1,9 @@
 @import url("fontawesome-all.min.css");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic");
 /*
+COLORS
+*/
+/*
 	Dopetrope by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
@@ -1057,19 +1060,19 @@ button,
   input[type="reset"].alt,
   button.alt,
   .button.alt {
-    background: #252122; }
+    background: #00aba9; }
     input[type="button"].alt:hover,
     input[type="submit"].alt:hover,
     input[type="reset"].alt:hover,
     button.alt:hover,
     .button.alt:hover {
-      background: #353132; }
+      background: #00c0be; }
     input[type="button"].alt:active,
     input[type="submit"].alt:active,
     input[type="reset"].alt:active,
     button.alt:active,
     .button.alt:active {
-      background: #151112; }
+      background: #00c0be; }
   input[type="button"].icon:before,
   input[type="submit"].icon:before,
   input[type="reset"].icon:before,
@@ -1196,6 +1199,14 @@ ul.dates {
       border-left: solid 1.25em #d52349;
       border-top: solid 1.8em transparent;
       border-bottom: solid 1.8em transparent; }
+    ul.dates .date.done {
+      background-color: #00b159; }
+      ul.dates .date.done:after {
+        border-left: solid 1.25em #00b159; }
+    ul.dates .date.current {
+      background-color: #00aba9; }
+      ul.dates .date.current:after {
+        border-left: solid 1.25em #00aba9; }
     ul.dates .date strong {
       display: block;
       font-size: 1.75em;
@@ -1220,6 +1231,9 @@ ul.divided {
     ul.divided li:first-child {
       border-top: 0;
       padding-top: 0; }
+
+.mb-0 {
+  margin-bottom: 0em; }
 
 /* Social */
 ul.social {
@@ -1250,29 +1264,58 @@ ul.social {
         font-size: 2em;
         line-height: 1.5em; }
       ul.social li a.fa-facebook {
-        background: #3c5a98; }
+        background: #00aba9; }
         ul.social li a.fa-facebook:hover {
-          background: #4c6aa8; }
+          background: #00c5c2; }
       ul.social li a.fa-twitter {
-        background: #2daae4; }
+        background: #00aba9; }
         ul.social li a.fa-twitter:hover {
-          background: #3dbaf4; }
+          background: #00c5c2; }
+      ul.social li a.fa-discord {
+        background: #00aba9; }
+        ul.social li a.fa-discord:hover {
+          background: #00c5c2; }
       ul.social li a.fa-dribbble {
-        background: #c4376b; }
+        background: #00aba9; }
         ul.social li a.fa-dribbble:hover {
-          background: #d4477b; }
+          background: #00c5c2; }
       ul.social li a.fa-linkedin {
-        background: #006599; }
+        background: #00aba9; }
         ul.social li a.fa-linkedin:hover {
-          background: #1075a9; }
+          background: #00c5c2; }
       ul.social li a.fa-tumblr {
-        background: #2b4661; }
+        background: #00aba9; }
         ul.social li a.fa-tumblr:hover {
-          background: #3b5671; }
+          background: #00c5c2; }
       ul.social li a.fa-google-plus {
-        background: #da2713; }
+        background: #00aba9; }
         ul.social li a.fa-google-plus:hover {
-          background: #ea3723; }
+          background: #00c5c2; }
+
+/* Badges */
+.badge {
+  background-color: teal;
+  display: inline-block;
+  color: #fff;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: 1px;
+  margin-right: 1px;
+  text-align: center;
+  border-radius: 5px;
+  font-size: smaller; }
+
+.badge-connect {
+  background-color: #d11141; }
+
+.badge-educate {
+  background-color: #00b159; }
+
+.badge-build {
+  background-color: #00aedb; }
+
+.badge-promote {
+  background-color: #ffc425; }
 
 /* Icons */
 .icon {
@@ -1301,7 +1344,7 @@ ul.social {
   .icon.featured {
     position: relative;
     display: inline-block;
-    background-color: #d52349;
+    background-color: #d11141;
     width: 9em;
     padding: 1.75em 0 0.75em 0;
     border-top-left-radius: 5px;
@@ -1317,25 +1360,33 @@ ul.social {
       position: absolute;
       bottom: -1.95em;
       left: 0;
-      border-top: solid 2em #d52349;
+      border-top: solid 2em #d11141;
       border-left: solid 4.5em transparent;
       border-right: solid 4.5em transparent; }
     .icon.featured.alt {
-      background-color: #252122; }
+      background-color: #00aba9; }
       .icon.featured.alt:after {
-        border-top-color: #252122; }
+        border-top-color: #00aba9; }
     .icon.featured.alt2 {
       background-color: #827a7c; }
       .icon.featured.alt2:after {
         border-top-color: #827a7c; }
     .icon.featured.alt3 {
-      background-color: #f1e12d; }
+      background-color: #ffc425; }
       .icon.featured.alt3:after {
-        border-top-color: #f1e12d; }
+        border-top-color: #ffc425; }
     .icon.featured.alt4 {
-      background-color: teal; }
+      background-color: #00aedb; }
       .icon.featured.alt4:after {
-        border-top-color: teal; }
+        border-top-color: #00aedb; }
+    .icon.featured.alt5 {
+      background-color: #00b159; }
+      .icon.featured.alt5:after {
+        border-top-color: #00b159; }
+
+.page-up {
+  font-weight: 900;
+  font-size: smaller; }
 
 /* Page Wrapper */
 #page-wrapper > section {
@@ -1393,7 +1444,7 @@ ul.social {
       #nav > ul > li:hover > a, #nav > ul > li.active > a {
         background: #f3f3f3; }
       #nav > ul > li.current > a {
-        background: #d52349;
+        background: #00aba9;
         color: #fff !important;
         font-weight: 700; }
 
@@ -1438,18 +1489,18 @@ ul.social {
 
 /* Banner */
 #banner {
-  background: #CCE8F4 url("../../images/pic01.jpg");
+  background: #faf9f9 url("../../images/ada03.jpg");
   background-position: center center;
   background-size: auto 100%;
   background-repeat: no-repeat;
   text-align: center;
   position: relative;
   padding: 8em 0;
-  margin: 2.5em 0 0 0; }
+  margin: 3.5em 0 0 0; }
   #banner header {
     background-color: rgba(34, 30, 31, 0.98);
     display: inline-block;
-    padding: 2.5em 5em;
+    padding: 2em 4em;
     border-radius: 5px; }
     #banner header h2 {
       color: #fff;
@@ -1474,6 +1525,72 @@ ul.social {
     font-size: 1.75em; }
   #intro p {
     margin: 0; }
+  #intro .first {
+    position: relative;
+    z-index: 1; }
+    #intro .first:before {
+      content: '';
+      width: 32px;
+      height: 100%;
+      position: absolute;
+      left: -24px;
+      top: 0;
+      display: block;
+      z-index: -1; }
+    #intro .first:after {
+      content: '';
+      width: 32px;
+      height: 100%;
+      position: absolute;
+      right: -24px;
+      top: 0;
+      display: block;
+      z-index: -1;
+      box-shadow: -32px 0 0 0 #fff, 0 -32px 0 0 #fff, 0 32px 0 0 #fff, -32px 32px 0 0 #fff, -32px -32px 0 0 #fff, 0 0 32px 0 rgba(0, 0, 0, 0.15); }
+  #intro .left-center {
+    position: relative;
+    z-index: 1; }
+    #intro .left-center:before {
+      content: '';
+      width: 32px;
+      height: 100%;
+      position: absolute;
+      left: -24px;
+      top: 0;
+      display: block;
+      z-index: -1; }
+    #intro .left-center:after {
+      content: '';
+      width: 32px;
+      height: 100%;
+      position: absolute;
+      right: -24px;
+      top: 0;
+      display: block;
+      z-index: -1;
+      box-shadow: -32px 0 0 0 #fff, 0 -32px 0 0 #fff, 0 32px 0 0 #fff, -32px 32px 0 0 #fff, -32px -32px 0 0 #fff, 0 0 32px 0 rgba(0, 0, 0, 0.15); }
+  #intro .right-center {
+    position: relative;
+    z-index: 1; }
+    #intro .right-center:before {
+      content: '';
+      width: 32px;
+      height: 100%;
+      position: absolute;
+      left: -24px;
+      top: 0;
+      display: block;
+      z-index: -1; }
+    #intro .right-center:after {
+      content: '';
+      width: 32px;
+      height: 100%;
+      position: absolute;
+      right: -24px;
+      top: 0;
+      display: block;
+      z-index: -1;
+      box-shadow: -32px 0 0 0 #fff, 0 -32px 0 0 #fff, 0 32px 0 0 #fff, -32px 32px 0 0 #fff, -32px -32px 0 0 #fff, 0 0 32px 0 rgba(0, 0, 0, 0.15); }
   #intro .middle {
     position: relative;
     z-index: 1; }
@@ -1669,6 +1786,10 @@ ul.social {
         padding-top: 0; }
       #intro section p {
         margin: 0; }
+    #intro .left-center:before, #intro .left-center:after {
+      display: none; }
+    #intro .right-center:before, #intro .right-center:after {
+      display: none; }
     #intro .middle:before, #intro .middle:after {
       display: none; }
     #intro footer {
