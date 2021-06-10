@@ -179,8 +179,8 @@ select {
   font-family: 'Source Sans Pro';
   font-weight: 300;
   color: #5d5d5d;
-  font-size: 14pt;
-  line-height: 1.75em; }
+  font-size: 16pt;
+  line-height: 1.5em; }
 
 strong,
 b {
@@ -1232,9 +1232,6 @@ ul.divided {
       border-top: 0;
       padding-top: 0; }
 
-.mb-0 {
-  margin-bottom: 0em; }
-
 /* Social */
 ul.social {
   list-style: none;
@@ -1263,21 +1260,21 @@ ul.social {
         color: #fff;
         font-size: 2em;
         line-height: 1.5em; }
-      ul.social li a.fa-facebook {
-        background: #00aba9; }
-        ul.social li a.fa-facebook:hover {
-          background: #00c5c2; }
       ul.social li a.fa-twitter {
         background: #00aba9; }
         ul.social li a.fa-twitter:hover {
           background: #00c5c2; }
+      ul.social li a.fa-youtube {
+        background: #00aba9; }
+        ul.social li a.fa-youtube:hover {
+          background: #00c5c2; }
+      ul.social li a.fa-telegram {
+        background: #00aba9; }
+        ul.social li a.fa-telegram:hover {
+          background: #00c5c2; }
       ul.social li a.fa-discord {
         background: #00aba9; }
         ul.social li a.fa-discord:hover {
-          background: #00c5c2; }
-      ul.social li a.fa-dribbble {
-        background: #00aba9; }
-        ul.social li a.fa-dribbble:hover {
           background: #00c5c2; }
       ul.social li a.fa-linkedin {
         background: #00aba9; }
@@ -1287,10 +1284,17 @@ ul.social {
         background: #00aba9; }
         ul.social li a.fa-tumblr:hover {
           background: #00c5c2; }
-      ul.social li a.fa-google-plus {
+      ul.social li a.fa-medium {
         background: #00aba9; }
-        ul.social li a.fa-google-plus:hover {
+        ul.social li a.fa-medium:hover {
           background: #00c5c2; }
+      ul.social li a.fa-reddit {
+        background: #00aba9; }
+        ul.social li a.fa-reddit:hover {
+          background: #00c5c2; }
+
+.mb-0 {
+  margin-bottom: 0em; }
 
 /* Badges */
 .badge {
@@ -1422,7 +1426,7 @@ ul.social {
 
 /* Nav */
 #nav {
-  margin: 1.5em 0 0 0; }
+  margin: 1em 0 -1.5em 0; }
   #nav > ul {
     margin: 0; }
     #nav > ul > li {
@@ -1888,6 +1892,7 @@ ul.social {
     #navPanel .link {
       display: block;
       color: #888;
+      font-weight: bolder;
       text-decoration: none;
       height: 44px;
       line-height: 44px;

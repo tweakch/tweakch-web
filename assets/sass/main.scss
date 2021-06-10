@@ -229,8 +229,8 @@ select {
     font-family: 'Source Sans Pro';
     font-weight: 300;
     color: #5d5d5d;
-    font-size: 14pt;
-    line-height: 1.75em;
+    font-size: 16pt;
+    line-height: 1.5em;
 }
 
 strong,
@@ -767,10 +767,6 @@ ul.divided {
     }
 }
 
-.mb-0 {
-    margin-bottom: 0em;
-}
-
 
 /* Social */
 
@@ -801,25 +797,25 @@ ul.social {
                 font-size: 2em;
                 line-height: 1.5em;
             }
-            &.fa-facebook {
-                background: $color-teal;
-                &:hover {
-                    background: lighten($color-teal, 5%);
-                }
-            }
             &.fa-twitter {
                 background: $color-teal;
                 &:hover {
                     background: lighten($color-teal, 5%);
                 }
             }
-            &.fa-discord {
+            &.fa-youtube {
                 background: $color-teal;
                 &:hover {
                     background: lighten($color-teal, 5%);
                 }
             }
-            &.fa-dribbble {
+            &.fa-telegram {
+                background: $color-teal;
+                &:hover {
+                    background: lighten($color-teal, 5%);
+                }
+            }
+            &.fa-discord {
                 background: $color-teal;
                 &:hover {
                     background: lighten($color-teal, 5%);
@@ -837,7 +833,13 @@ ul.social {
                     background: lighten($color-teal, 5%);
                 }
             }
-            &.fa-google-plus {
+            &.fa-medium {
+                background: $color-teal;
+                &:hover {
+                    background: lighten($color-teal, 5%);
+                }
+            }
+            &.fa-reddit {
                 background: $color-teal;
                 &:hover {
                     background: lighten($color-teal, 5%);
@@ -845,6 +847,10 @@ ul.social {
             }
         }
     }
+}
+
+.mb-0 {
+    margin-bottom: 0em;
 }
 
 
@@ -1016,7 +1022,7 @@ ul.social {
 /* Nav */
 
 #nav {
-    margin: 1.5em 0 0 0;
+    margin: 1em 0 -1.5em 0;
     // position: fixed;
     // top: 0;
     // z-index: 2;
@@ -1596,6 +1602,7 @@ ul.social {
         .link {
             display: block;
             color: #888;
+            font-weight: bolder;
             text-decoration: none;
             height: 44px;
             line-height: 44px;
