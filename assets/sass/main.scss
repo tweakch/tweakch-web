@@ -558,6 +558,15 @@ button,
             background: lighten($color-act, 4.20%);
         }
     }
+    &.promote {
+        background: $color-promote;
+        &:hover {
+            background: lighten($color-promote, 4.20%);
+        }
+        &:active {
+            background: lighten($color-promote, 4.20%);
+        }
+    }
     &.icon {
         &:before {
             opacity: 0.35;
@@ -1081,6 +1090,9 @@ ul.social {
         text-decoration: none;
         @include vendor('transition',
         'color .25s ease-in-out');
+        >i {
+            color: #a5a5a5 !important;
+        }
     }
     li {
         padding: 0.25em 0 0.25em 0;
