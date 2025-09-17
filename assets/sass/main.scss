@@ -30,9 +30,9 @@ $color-current: #f37735;
 $color-amber: #f37735;
 
 /*
-	Dopetrope by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+        Dopetrope by HTML5 UP
+        html5up.net | @ajlkn
+        Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
 // Breakpoints.
@@ -40,6 +40,26 @@ $color-amber: #f37735;
 large: ( 981px, 1280px),
 medium: ( 737px, 980px),
 small: ( null, 736px)));
+
+/* Modern Mobile CSS Improvements */
+@supports (touch-action: manipulation) {
+    /* Optimize for touch devices - limit to interactive elements only */
+    a, button, .button, input[type="button"], input[type="submit"], input[type="reset"] {
+        touch-action: manipulation;
+    }
+}
+
+/* Safe area padding for outer wrappers */
+#page-wrapper, #header, #footer {
+    padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right));
+}
+
+/* Improved mobile scrolling */
+@media screen and (max-width: 736px) {
+    body {
+        -webkit-overflow-scrolling: touch;
+    }
+}
 // Reset.
 // Based on meyerweb.com/eric/tools/css/reset (v2.0 | 20110126 | License: public domain)
 html,
@@ -1417,6 +1437,23 @@ ul.social {
     /* Header */
     #header {
         padding: 4em 0 3em 0;
+        
+        /* Navigation touch targets */
+        #nav ul li a {
+            min-height: 44px;
+            min-width: 44px;
+            padding: 12px 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+            
+            &:hover, &:focus {
+                background-color: rgba(0, 0, 0, 0.05);
+            }
+        }
     }
     /* Banner */
     #banner {
@@ -1470,10 +1507,26 @@ ul.social {
 }
 
 @include breakpoint('<=medium') {
-    /* Basic */
-    html,
-    body {
-        overflow-x: hidden;
+    /* Typography improvements for better mobile readability */
+    body,
+    input,
+    textarea,
+    select {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    /* Fluid typography for better mobile scaling */
+    h1 {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+    }
+    
+    h2 {
+        font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+    }
+    
+    h3 {
+        font-size: clamp(1.2rem, 3vw, 1.5rem);
     }
     /* Box */
     .box {
@@ -1680,7 +1733,24 @@ ul.social {
     input,
     textarea,
     select {
-        font-size: 11pt;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    
+    /* Fluid typography for better mobile scaling */
+    h1 {
+        font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+        line-height: 1.2;
+    }
+    
+    h2 {
+        font-size: clamp(1.4rem, 3.5vw, 1.8rem) !important;
+        line-height: 1.3;
+    }
+    
+    h3 {
+        font-size: clamp(1.2rem, 3vw, 1.5rem) !important;
+        line-height: 1.4;
     }
     h2,
     h3,
@@ -1695,18 +1765,26 @@ ul.social {
     input[type="reset"],
     button,
     .button {
+        min-height: 44px; /* Touch-friendly minimum height */
+        min-width: 44px; /* Touch-friendly minimum width */
+        padding: 12px 24px; /* Better thumb-friendly padding */
+        font-size: 16px; /* Larger, more readable text */
+        border-radius: 8px; /* Modern rounded corners */
+        
         &.large {
-            font-size: 1.1em;
-            padding: 0.65em 1.5em 0.65em 1.5em;
+            font-size: 18px;
+            padding: 16px 32px;
+            min-height: 48px;
         }
     }
     /* Actions */
     ul.actions {
         li {
-            margin: 1em 0 0 0;
+            margin: 16px 0 0 0; /* Increased spacing for easier navigation */
             display: block;
             .button {
                 width: 100%;
+                text-align: center;
             }
             &:first-child {
                 margin-top: 0;
@@ -1726,27 +1804,54 @@ ul.social {
     }
     /* Box */
     .box {
-        padding: 25px 15px 20px 15px;
+        padding: 24px 20px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        
+        /* Removed touch-action from non-interactive container */
+        
         .image.featured {
-            left: 15px;
-            top: 15px;
-            margin: -40px 0 40px -30px;
+            left: 20px;
+            top: 20px;
+            margin: -40px 0 24px -20px;
+            border-radius: 8px;
+            overflow: hidden;
         }
+        
         &.post {
             header {
                 padding-top: 0;
-                margin: 0 0 1em 0;
+                margin: 0 0 16px 0;
             }
             h2 {
-                font-size: 1.5em;
-                line-height: 1.5em;
+                font-size: 1.4em;
+                line-height: 1.3em;
+                margin-bottom: 12px;
             }
             header {
                 >p {
                     margin-top: 0;
                     font-size: 1em;
+                    line-height: 1.4;
                 }
             }
+        }
+        
+        /* Project badges */
+        .badge {
+            display: inline-block;
+            margin: 4px 6px 4px 0;
+            padding: 6px 12px;
+            font-size: 14px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        
+        /* Footer buttons in project cards */
+        footer .actions li .button {
+            min-height: 40px;
+            font-size: 14px;
+            padding: 8px 16px;
         }
     }
     /* Divided */
@@ -1761,6 +1866,19 @@ ul.social {
             padding: 0.8em 0 0.8em 7em;
             h3 {
                 top: 0.8em;
+            }
+            a {
+                min-height: 44px;
+                padding: 8px 12px;
+                display: inline-flex;
+                align-items: center;
+                text-decoration: none;
+                border-radius: 4px;
+                transition: background-color 0.2s ease;
+                
+                &:hover, &:focus {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
             }
         }
     }
@@ -1784,12 +1902,43 @@ ul.social {
                 padding-top: 0;
                 margin-top: 0;
             }
+            a {
+                min-height: 44px;
+                padding: 8px 12px;
+                display: inline-flex;
+                align-items: center;
+                text-decoration: none;
+                border-radius: 4px;
+                transition: background-color 0.2s ease;
+                
+                &:hover, &:focus {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+            }
         }
     }
     /* Social */
     ul.social {
         li {
             margin: 0 0.5em 0.75em 0;
+            a {
+                min-height: 44px;
+                min-width: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                padding: 8px;
+                border-radius: 8px;
+                text-decoration: none;
+                transition: all 0.2s ease;
+                
+                &:before {
+                    font-size: 20px;
+                    line-height: 1;
+                }
+            }
         }
     }
     /* Icons */
@@ -1806,12 +1955,35 @@ ul.social {
     /* Header */
     #header {
         text-align: center;
-        padding: 2em 0;
+        padding: 24px 16px; /* Better mobile padding */
+        
         h1 {
             color: #252122;
             font-weight: 900;
             font-size: 1.75em;
             letter-spacing: -0.035em;
+            margin-bottom: 8px;
+        }
+        
+        /* Navigation improvements */
+        nav ul {
+            li {
+                margin: 8px 0; /* Better touch spacing */
+                
+                a {
+                    padding: 12px 16px; /* Improved touch targets */
+                    min-height: 44px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 6px;
+                    transition: background-color 0.2s ease;
+                    
+                    &:hover, &:focus {
+                        background-color: rgba(209, 17, 65, 0.1);
+                    }
+                }
+            }
         }
     }
     /* Intro */
@@ -1827,19 +1999,21 @@ ul.social {
     }
     /* Banner */
     #banner {
-        padding: 6em 0;
-        margin: 2em 0 0 0;
+        padding: 48px 16px;
+        margin: 32px 0 0 0;
         header {
-            padding: 1.5em 1em 1.5em 1em;
+            padding: 24px 20px;
             display: block;
-            border-radius: 0;
+            border-radius: 12px;
             h2 {
-                font-size: 1.5em;
-                line-height: 1.5em;
-                margin: 0 0 0.25em 0;
+                font-size: 1.75em; /* Larger for better mobile readability */
+                line-height: 1.3em;
+                margin: 0 0 12px 0;
             }
             p {
-                font-size: 1.2em;
+                font-size: 1.1em;
+                line-height: 1.4;
+                margin-bottom: 0;
             }
         }
     }
@@ -1850,5 +2024,29 @@ ul.social {
     /* Footer */
     #footer {
         padding: 40px 0 20px 0;
+        
+        /* Footer link touch targets */
+        a {
+            min-height: 44px;
+            padding: 8px 12px;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+            
+            &:hover, &:focus {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+        }
+        
+        /* Copyright links */
+        #copyright ul.links li a {
+            min-height: 44px;
+            padding: 12px 16px;
+            display: inline-flex;
+            align-items: center;
+            border-radius: 4px;
+        }
     }
 }
