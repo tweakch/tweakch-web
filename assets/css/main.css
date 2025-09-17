@@ -4,10 +4,28 @@
 COLORS
 */
 /*
-	Dopetrope by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+        Dopetrope by HTML5 UP
+        html5up.net | @ajlkn
+        Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
+/* Modern Mobile CSS Improvements */
+@supports (touch-action: manipulation) {
+  /* Optimize for touch devices - limit to interactive elements only */
+  a, button, .button, input[type=button], input[type=submit], input[type=reset] {
+    touch-action: manipulation;
+  }
+}
+/* Safe area padding for outer wrappers */
+#page-wrapper, #header, #footer {
+  padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right));
+}
+
+/* Improved mobile scrolling */
+@media screen and (max-width: 736px) {
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
 html,
 body,
 div,
@@ -2260,6 +2278,21 @@ ul.social li a.fa-reddit:hover {
   /* Header */
   #header {
     padding: 4em 0 3em 0;
+    /* Navigation touch targets */
+  }
+  #header #nav ul li a {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+  }
+  #header #nav ul li a:hover, #header #nav ul li a:focus {
+    background-color: rgba(0, 0, 0, 0.05);
   }
   /* Banner */
   #banner {
@@ -2308,10 +2341,23 @@ ul.social li a.fa-reddit:hover {
 }
 
 @media screen and (max-width: 980px) {
-  /* Basic */
-  html,
-  body {
-    overflow-x: hidden;
+  /* Typography improvements for better mobile readability */
+  body,
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  /* Fluid typography for better mobile scaling */
+  h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+  }
+  h2 {
+    font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+  }
+  h3 {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
   }
   /* Box */
   .box footer ul.actions li {
@@ -2527,7 +2573,21 @@ ul.social li a.fa-reddit:hover {
   input,
   textarea,
   select {
-    font-size: 11pt;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  /* Fluid typography for better mobile scaling */
+  h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+    line-height: 1.2;
+  }
+  h2 {
+    font-size: clamp(1.4rem, 3.5vw, 1.8rem) !important;
+    line-height: 1.3;
+  }
+  h3 {
+    font-size: clamp(1.2rem, 3vw, 1.5rem) !important;
+    line-height: 1.4;
   }
   h2,
   h3,
@@ -2537,21 +2597,34 @@ ul.social li a.fa-reddit:hover {
     font-size: 1.25em;
   }
   /* Button */
+  input[type=button],
+  input[type=submit],
+  input[type=reset],
+  button,
+  .button {
+    min-height: 44px; /* Touch-friendly minimum height */
+    min-width: 44px; /* Touch-friendly minimum width */
+    padding: 12px 24px; /* Better thumb-friendly padding */
+    font-size: 16px; /* Larger, more readable text */
+    border-radius: 8px; /* Modern rounded corners */
+  }
   input[type=button].large,
   input[type=submit].large,
   input[type=reset].large,
   button.large,
   .button.large {
-    font-size: 1.1em;
-    padding: 0.65em 1.5em 0.65em 1.5em;
+    font-size: 18px;
+    padding: 16px 32px;
+    min-height: 48px;
   }
   /* Actions */
   ul.actions li {
-    margin: 1em 0 0 0;
+    margin: 16px 0 0 0; /* Increased spacing for easier navigation */
     display: block;
   }
   ul.actions li .button {
     width: 100%;
+    text-align: center;
   }
   ul.actions li:first-child {
     margin-top: 0;
@@ -2569,24 +2642,50 @@ ul.social li a.fa-reddit:hover {
   }
   /* Box */
   .box {
-    padding: 25px 15px 20px 15px;
+    padding: 24px 20px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    /* Removed touch-action from non-interactive container */
   }
   .box .image.featured {
-    left: 15px;
-    top: 15px;
-    margin: -40px 0 40px -30px;
+    left: 20px;
+    top: 20px;
+    margin: -40px 0 24px -20px;
+    border-radius: 8px;
+    overflow: hidden;
   }
   .box.post header {
     padding-top: 0;
-    margin: 0 0 1em 0;
+    margin: 0 0 16px 0;
   }
   .box.post h2 {
-    font-size: 1.5em;
-    line-height: 1.5em;
+    font-size: 1.4em;
+    line-height: 1.3em;
+    margin-bottom: 12px;
   }
   .box.post header > p {
     margin-top: 0;
     font-size: 1em;
+    line-height: 1.4;
+  }
+  .box {
+    /* Project badges */
+  }
+  .box .badge {
+    display: inline-block;
+    margin: 4px 6px 4px 0;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .box {
+    /* Footer buttons in project cards */
+  }
+  .box footer .actions li .button {
+    min-height: 40px;
+    font-size: 14px;
+    padding: 8px 16px;
   }
   /* Divided */
   ul.divided li {
@@ -2598,6 +2697,18 @@ ul.social li a.fa-reddit:hover {
   }
   ul.contact li h3 {
     top: 0.8em;
+  }
+  ul.contact li a {
+    min-height: 44px;
+    padding: 8px 12px;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  ul.contact li a:hover, ul.contact li a:focus {
+    background-color: rgba(255, 255, 255, 0.1);
   }
   /* Dates */
   ul.dates li {
@@ -2617,9 +2728,38 @@ ul.social li a.fa-reddit:hover {
     padding-top: 0;
     margin-top: 0;
   }
+  ul.links li a {
+    min-height: 44px;
+    padding: 8px 12px;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  ul.links li a:hover, ul.links li a:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
   /* Social */
   ul.social li {
     margin: 0 0.5em 0.75em 0;
+  }
+  ul.social li a {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 8px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  ul.social li a:before {
+    font-size: 20px;
+    line-height: 1;
   }
   /* Icons */
   .icon.featured {
@@ -2633,13 +2773,32 @@ ul.social li a.fa-reddit:hover {
   /* Header */
   #header {
     text-align: center;
-    padding: 2em 0;
+    padding: 24px 16px; /* Better mobile padding */
   }
   #header h1 {
     color: #252122;
     font-weight: 900;
     font-size: 1.75em;
     letter-spacing: -0.035em;
+    margin-bottom: 8px;
+  }
+  #header {
+    /* Navigation improvements */
+  }
+  #header nav ul li {
+    margin: 8px 0; /* Better touch spacing */
+  }
+  #header nav ul li a {
+    padding: 12px 16px; /* Improved touch targets */
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+  }
+  #header nav ul li a:hover, #header nav ul li a:focus {
+    background-color: rgba(209, 17, 65, 0.1);
   }
   /* Intro */
   #intro {
@@ -2654,21 +2813,23 @@ ul.social li a.fa-reddit:hover {
   }
   /* Banner */
   #banner {
-    padding: 6em 0;
-    margin: 2em 0 0 0;
+    padding: 48px 16px;
+    margin: 32px 0 0 0;
   }
   #banner header {
-    padding: 1.5em 1em 1.5em 1em;
+    padding: 24px 20px;
     display: block;
-    border-radius: 0;
+    border-radius: 12px;
   }
   #banner header h2 {
-    font-size: 1.5em;
-    line-height: 1.5em;
-    margin: 0 0 0.25em 0;
+    font-size: 1.75em; /* Larger for better mobile readability */
+    line-height: 1.3em;
+    margin: 0 0 12px 0;
   }
   #banner header p {
-    font-size: 1.2em;
+    font-size: 1.1em;
+    line-height: 1.4;
+    margin-bottom: 0;
   }
   /* Main */
   #main {
@@ -2677,6 +2838,29 @@ ul.social li a.fa-reddit:hover {
   /* Footer */
   #footer {
     padding: 40px 0 20px 0;
+    /* Footer link touch targets */
+  }
+  #footer a {
+    min-height: 44px;
+    padding: 8px 12px;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  #footer a:hover, #footer a:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  #footer {
+    /* Copyright links */
+  }
+  #footer #copyright ul.links li a {
+    min-height: 44px;
+    padding: 12px 16px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 4px;
   }
 }
 
