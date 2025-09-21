@@ -12,6 +12,7 @@ images/ada01.jpeg
 # PHP / Composer
 vendor/
 var/
+docker/
 composer.phar
 *.cache
 *.log
