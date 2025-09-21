@@ -8,3 +8,12 @@
 images/ada.jpeg
 images/ada - Copy.jpeg
 images/ada01.jpeg
+
+# PHP / Composer
+vendor/
+var/
+composer.phar
+*.cache
+*.log
+/.phpunit.result.cache
+/.php-cs-fixer.cache
