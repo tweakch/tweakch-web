@@ -1,0 +1,38 @@
+<nav id="nav">
+    <ul>
+        {% for item in navigation_items %}
+            <li{{ item.route == current_page ? ' class="current"' : '' }}>
+                <a href="{{ item.url }}">{{ lang.get(item.label) }}</a>
+                {% if item.children is defined %}
+                    <ul>
+                        {% for child in item.children %}
+                            <li>
+                                <a href="{{ child.url }}">{{ child.label }}</a>
+                                {% if child.children is defined %}
+                                    <ul>
+                                        {% for grandchild in child.children %}
+                                            <li><a href="{{ grandchild.url }}">{{ grandchild.label }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+        
+        {# Language Switcher #}
+        <li>
+            <a href="#" class="icon solid fa-globe">{{ lang.get('language.switch_to') }}</a>
+            <ul>
+                <li{{ lang.currentLanguage == 'en' ? ' class="active"' : '' }}>
+                    <a href="?lang=en">{{ lang.get('language.english') }}</a>
+                </li>
+                <li{{ lang.currentLanguage == 'de' ? ' class="active"' : '' }}>
+                    <a href="?lang=de">{{ lang.get('language.german') }}</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>

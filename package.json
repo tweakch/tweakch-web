@@ -1,26 +1,5 @@
 {
-    "name": "tweakch-web",
-    "version": "1.0.0",
-    "description": "tweakch stakepool launchpad",
-    "main": "index.html",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build-css": "sass assets/sass/main.scss assets/css/main.css",
-        "watch-css": "sass --watch assets/sass/main.scss assets/css/main.css",
-        "start": "npm run build-css && npx http-server -p ${PORT:-5000} -a 0.0.0.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/tweakch/tweakch-web.git"
-    },
-    "author": "tweakch",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/tweakch/tweakch-web/issues"
-    },
-    "homepage": "https://github.com/tweakch/tweakch-web#readme",
-    "dependencies": {
-        "sass": "^1.70.0",
-        "http-server": "^14.1.1"
-    }
+  "dependencies": {
+    "sass": "^1.93.0"
+  }
 }

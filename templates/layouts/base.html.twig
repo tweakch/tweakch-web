@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="{{ lang.currentLanguage }}">
+    <head>
+        <title>{{ page_title }}</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="description" content="{{ meta_description|default(site.description) }}" />
+        <meta name="author" content="{{ site.author }}" />
+        <meta property="og:title" content="{{ page_title }}" />
+        <meta property="og:description" content="{{ meta_description|default(site.description) }}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="{{ site.name }}" />
+        {% block page_meta %}{% endblock %}
+        {% block page_head_extra %}{% endblock %}
+        <link rel="stylesheet" href="assets/css/main.css" />
+        {% block page_styles %}{% endblock %}
+        {% block additional_css %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    </head>
+    <body class="{{ body_class|default('is-preload') }}">
+        <div id="page-wrapper">
+            <section id="header">
+                {# Site Logo #}
+                <h1><a href="index.php">{{ site.name }}</a></h1>
+                
+                {# Navigation #}
+                {% include 'components/navigation.html.twig' %}
+
+                {# Header content (banner, intro, etc.) #}
+                {% block header_content %}{% endblock %}
+            </section>
+
+            {# Main page content #}
+            {% block content %}{% endblock %}
+
+            {# Footer #}
+            {% include 'components/footer.html.twig' %}
+        </div>
+        
+        {# Scripts #}
+        {% include 'components/scripts.html.twig' %}
+        {# Page-level scripts extension point #}
+        {% block page_scripts %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<section id="footer">
+    <div class="container">
+        <div class="row">
+            {# Recent Posts Section #}
+            <div class="col-8 col-12-medium">
+                {% include 'components/footer/recent-posts.html.twig' %}
+            </div>
+            
+            {# About Section #}
+            <div class="col-4 col-12-medium">
+                {% include 'components/footer/about.html.twig' %}
+            </div>
+            
+            {# Links Sections #}
+            <div class="col-4 col-6-medium col-12-small">
+                {% include 'components/footer/links-section.html.twig' with {
+                    'section': 'section1'
+                } %}
+            </div>
+            
+            <div class="col-4 col-6-medium col-12-small">
+                {% include 'components/footer/links-section.html.twig' with {
+                    'section': 'section2'
+                } %}
+            </div>
+            
+            {# Contact & Social Section #}
+            <div class="col-4 col-12-medium">
+                {% include 'components/footer/contact-social.html.twig' %}
+            </div>
+            
+            {# Copyright #}
+            <div class="col-12">
+                {% include 'components/footer/copyright.html.twig' %}
+            </div>
+        </div>
+    </div>
+</section>

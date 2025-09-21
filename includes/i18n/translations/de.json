@@ -1,0 +1,186 @@
+{
+  "site": {
+    "name": "TWIːK",
+    "description": "Eine responsive HTML5 + CSS3 Website-Vorlage, entworfen von HTML5 UP und kostenlos unter der Creative Commons Lizenz veröffentlicht.",
+    "author": "tweakch"
+  },
+  "nav": {
+    "home": "Startseite",
+    "blog": "Blog",
+    "left_sidebar": "Linke Seitenleiste",
+    "right_sidebar": "Rechte Seitenleiste",
+    "no_sidebar": "Keine Seitenleiste"
+  },
+  "banner": {
+    "title": "Alexander Klee",
+    "subtitle": "Entwickelt Menschen und Software mit Leidenschaft"
+  },
+  "sections": {
+    "portfolio": {
+      "title": "Portfolio",
+      "subtitle": "Eine Sammlung meiner neuesten Arbeiten"
+    },
+    "blog": {
+      "title": "Blog",
+      "subtitle": "Neueste Gedanken und Updates"
+    },
+    "intro": {
+      "section1": {
+        "title": "Über mich",
+        "description": "Ich bin ein leidenschaftlicher Entwickler, spezialisiert auf PHP und moderne Webtechnologien. Willkommen in meinem Portfolio!"
+      },
+      "section2": {
+        "title": "Fähigkeiten",
+        "description": "Erfahren in PHP, JavaScript, HTML5, CSS3 und Frameworks wie Laravel und React. Ich erstelle skalierbare und wartbare Lösungen."
+      },
+      "section3": {
+        "title": "Kontakt",
+        "description": "Interessiert an einer Zusammenarbeit oder haben Sie eine Frage? Kontaktieren Sie mich per E-Mail oder über das Kontaktformular unten."
+      },
+      "get_started": "Loslegen",
+      "learn_more": "Mehr erfahren",
+      "contact_me": "Kontaktiere mich"
+    }
+  },
+  "portfolio": {
+    "find_out_more": "Mehr erfahren",
+    "item1": {
+      "title": "Projekt Eins",
+      "description": "Eine schöne Webanwendung, entwickelt mit modernen Technologien."
+    },
+    "item2": {
+      "title": "Projekt Zwei",
+      "description": "Eine innovative Lösung für die digitale Transformation."
+    },
+    "item3": {
+      "title": "Projekt Drei",
+      "description": "Kreatives Design trifft auf funktionale Exzellenz."
+    },
+    "item4": {
+      "title": "Projekt Vier",
+      "description": "Die Grenzen der Webentwicklung erweitern."
+    },
+    "item5": {
+      "title": "Projekt Fünf",
+      "description": "Wo Kunst auf Technologie trifft."
+    },
+    "item6": {
+      "title": "Projekt Sechs",
+      "description": "Digitale Erlebnisse gestalten, die zählen."
+    }
+  },
+  "blog": {
+    "continue_reading": "Weiterlesen",
+    "comments": "Kommentare",
+    "post1": {
+      "title": "Willkommen in meinem Blog",
+      "excerpt": "Ich beginne meine Reise in der Webentwicklung und teile meine Erfahrungen.",
+      "date": "15. Oktober 2024"
+    },
+    "post2": {
+      "title": "Die Kunst des sauberen Codes",
+      "excerpt": "Erkundung bewährter Praktiken für wartbaren und lesbaren Code.",
+      "date": "10. Oktober 2024"
+    },
+    "post3": {
+      "title": "Moderne Web-Technologien",
+      "excerpt": "Ein tiefer Einblick in die neuesten Tools und Frameworks, die das Web formen.",
+      "date": "5. Oktober 2024"
+    }
+  },
+  "footer": {
+    "recent_posts": {
+      "title": "Neueste Beiträge",
+      "posts": [
+        {
+          "date": "27. Jan",
+          "title": "Lorem dolor sit amet veroeros",
+          "excerpt": "Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam."
+        },
+        {
+          "date": "23. Jan",
+          "title": "Ipsum sed blandit nisl consequat",
+          "excerpt": "Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem."
+        },
+        {
+          "date": "15. Jan",
+          "title": "Magna tempus lorem feugiat",
+          "excerpt": "Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat."
+        },
+        {
+          "date": "12. Jan",
+          "title": "Dolore tempus ipsum feugiat nulla",
+          "excerpt": "Feugiat lorem dolor sed nullam tempus lorem ipsum dolor sit amet nullam consequat."
+        },
+        {
+          "date": "10. Jan",
+          "title": "Blandit tempus aliquam?",
+          "excerpt": "Feugiat sed tempus blandit tempus adipiscing nisl lorem ipsum dolor sit amet dolore."
+        }
+      ]
+    },
+    "about": {
+      "title": "Worum geht es hier?",
+      "description": "Dies ist <strong>Dopetrope</strong>, eine kostenlose, vollständig responsive HTML5-Website-Vorlage von AJ für HTML5 UP. Sie wird kostenlos unter der Creative Commons Attribution-Lizenz veröffentlicht, also verwenden Sie sie gerne für jedes persönliche oder kommerzielle Projekt – vergessen Sie nur nicht, uns zu erwähnen!",
+      "find_out_more": "Mehr erfahren"
+    },
+    "links": {
+      "section1": {
+        "title": "Schnelle Links",
+        "links": [
+          "Lorem ipsum dolor sit amet sit veroeros",
+          "Sed et blandit consequat sed tlorem blandit",
+          "Adipiscing feugiat phasellus sed tempus",
+          "Hendrerit tortor vitae mattis tempor sapien",
+          "Sem feugiat sapien id suscipit magna felis nec",
+          "Elit class aptent taciti sociosqu ad litora"
+        ]
+      },
+      "section2": {
+        "title": "Ressourcen",
+        "links": [
+          "Lorem ipsum dolor sit amet sit veroeros",
+          "Sed et blandit consequat sed tlorem blandit",
+          "Adipiscing feugiat phasellus sed tempus",
+          "Hendrerit tortor vitae mattis tempor sapien",
+          "Sem feugiat sapien id suscipit magna felis nec",
+          "Elit class aptent taciti sociosqu ad litora"
+        ]
+      }
+    },
+    "social": {
+      "title": "Verbinden Sie sich mit uns",
+      "platforms": {
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "dribbble": "Dribbble",
+        "tumblr": "Tumblr",
+        "linkedin": "LinkedIn"
+      }
+    },
+    "contact": {
+      "address": {
+        "label": "Adresse",
+        "company": "Untitled Incorporated",
+        "street": "1234 Somewhere Road Suite",
+        "city": "Nashville, TN 00000-0000"
+      },
+      "mail": {
+        "label": "E-Mail",
+        "email": "someone@untitled.tld"
+      },
+      "phone": {
+        "label": "Telefon",
+        "number": "(800) 000-0000"
+      }
+    },
+    "copyright": "© 2024 TWIːK. Alle Rechte vorbehalten.",
+    "designed_by": "Design von",
+    "html5_up": "HTML5 UP"
+  },
+  "language": {
+    "switch_to": "Wechseln zu",
+    "english": "Englisch",
+    "german": "Deutsch"
+  }
+}

@@ -1,0 +1,9 @@
+old/
+.git
+.gitignore
+node_modules
+vendor
+*.log
+.DS_Store
+.idea
+.vscode

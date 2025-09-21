@@ -1,0 +1,51 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block page_meta %}
+  <meta name="description" content="Portfolio projects showcase" />
+{% endblock %}
+
+{% block content %}
+<section id="main">
+  <div class="container">
+    <header class="major"><h2>Portfolio</h2><p>Selected projects & work</p></header>
+    <div class="row">
+      {% if projects %}
+        {% for project in projects %}
+          <div class="col-4 col-12-small" style="margin-bottom:1.5rem;">
+            <section class="box">
+              <a href="portfolio.php?project={{ project.slug }}" class="image featured"><img src="images/pic0{{ loop.index % 10 + 1 }}.jpg" alt="{{ project.title }}"></a>
+              <header><h3><a href="portfolio.php?project={{ project.slug }}">{{ project.title }}</a></h3></header>
+              {% if project.client or project.role %}
+                <p class="project-meta">
+                  {% if project.client %}<strong>{{ project.client }}</strong>{% endif %}
+                  {% if project.role %} <span class="sep">•</span> {{ project.role }}{% endif %}
+                </p>
+              {% endif %}
+              <p>{{ project.description|slice(0,160) }}{% if project.description|length > 160 %}...{% endif %}</p>
+              {% if project.tech %}
+                <div class="tech-chips">
+                  {% for t in project.tech|slice(0,5) %}<span class="tech-chip">{{ t }}</span>{% endfor %}
+                  {% if project.tech|length > 5 %}<span class="tech-chip more">+{{ project.tech|length - 5 }}</span>{% endif %}
+                </div>
+              {% endif %}
+              <footer><ul class="actions"><li><a href="portfolio.php?project={{ project.slug }}" class="button alt">View</a></li></ul></footer>
+            </section>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-12"><p>No projects available yet.</p></div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block page_styles %}
+<style>
+.project-meta{color:#666;font-size:.8rem;margin:.25rem 0 .75rem}
+.tech-chips{margin:.5rem 0 .75rem;display:flex;flex-wrap:wrap;gap:.4rem}
+.tech-chip{background:#f0f2f5;padding:.25rem .55rem;border-radius:2px;font-size:.65rem;line-height:1;font-weight:500;color:#333}
+.tech-chip.more{background:#e2e8f0;color:#555}
+@media (max-width:736px){.col-4{width:100%!important}}
+</style>
+{% endblock %}

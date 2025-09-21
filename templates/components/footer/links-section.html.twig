@@ -1,0 +1,35 @@
+<section>
+    <header>
+        <h2>{{ lang.get('footer.links.' ~ section ~ '.title') }}</h2>
+    </header>
+    <ul class="divided">
+        {% set links = lang.get('footer.links.' ~ section ~ '.links') %}
+        {% if links is iterable %}
+            {% for link in links %}
+                <li><a href="#">{{ link }}</a></li>
+            {% endfor %}
+        {% else %}
+            {# Fallback content based on section #}
+            {% set fallback_links = section == 'section1' ? 
+                [
+                    'Lorem ipsum dolor sit amet sit veroeros',
+                    'Sed et blandit consequat sed tlorem blandit',
+                    'Adipiscing feugiat phasellus sed tempus',
+                    'Hendrerit tortor vitae mattis tempor sapien',
+                    'Sem feugiat sapien id suscipit magna felis nec',
+                    'Elit class aptent taciti sociosqu ad litora'
+                ] : 
+                [
+                    'Lorem ipsum dolor sit amet sit veroeros',
+                    'Sed et blandit consequat sed tlorem blandit',
+                    'Adipiscing feugiat phasellus sed tempus',
+                    'Hendrerit tortor vitae mattis tempor sapien',
+                    'Sem feugiat sapien id suscipit magna felis nec',
+                    'Elit class aptent taciti sociosqu ad litora'
+                ] %}
+            {% for link in fallback_links %}
+                <li><a href="#">{{ link }}</a></li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+</section>

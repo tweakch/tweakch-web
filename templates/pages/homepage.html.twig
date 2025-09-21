@@ -1,0 +1,95 @@
+{% extends "layouts/base.html.twig" %}
+
+{% block header_content %}
+				<!-- Banner -->
+				<section id="banner">
+					<header>
+						<h2>{{ lang.get('banner.title') }}</h2>
+						<p>{{ lang.get('banner.subtitle') }}</p>
+					</header>
+				</section>
+
+				<!-- Intro -->
+				<section id="intro" class="container">
+					<div class="row">
+						{% for section in intro_sections %}
+							{% set icon_class = 'icon solid featured' %}
+							{% set button_class = 'button' %}
+							{% if section.class == 'middle' %}
+								{% set icon_class = icon_class ~ ' alt' %}
+								{% set button_class = button_class ~ ' alt' %}
+							{% elseif section.class == 'last' %}
+								{% set icon_class = icon_class ~ ' alt2' %}
+								{% set button_class = button_class ~ ' alt2' %}
+							{% endif %}
+
+							
+							<div class="col-4 col-12-medium">
+								<section class="{{ section.class }}">
+									<i class="{{ icon_class }} {{ section.icon }}"></i>
+									<header><h2>{{ section.title }}</h2></header>
+									<p>{{ section.desc }}</p>
+								</section>
+							</div>
+						{% endfor %}
+					</div>
+					<!--
+					<footer>
+						<ul class="actions">
+							<li><a href="#" class="button large">{{ lang.get('sections.intro.get_started') }}</a></li>
+							<li><a href="#" class="button alt large">{{ lang.get('sections.intro.learn_more') }}</a></li>
+							<li><a href="#" class="button alt2 large">{{ lang.get('sections.intro.contact_me') }}</a></li>
+						</ul>
+					</footer>
+					-->
+				</section>
+{% endblock %}
+
+{% block content %}
+<!-- Main -->
+<section id="main">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<section>
+					<header class="major"><h2>{{ lang.get('sections.portfolio.title') }}</h2></header>
+					<div class="row">
+						{% for item in portfolio %}
+						<div class="col-4 col-6-medium col-12-small">
+							<section class="box">
+								<a href="#" class="image featured"><img src="images/{{ item.img }}" alt="" /></a>
+								<header><h3>{{ item.title }}</h3></header>
+								<p>{{ item.desc }}</p>
+								<footer><ul class="actions"><li><a href="#" class="button alt">{{ lang.get('portfolio.find_out_more') }}</a></li></ul></footer>
+							</section>
+						</div>
+						{% endfor %}
+					</div>
+				</section>
+			</div>
+			<div class="col-12">
+				<section>
+					<header class="major"><h2>{{ lang.get('sections.blog.title') }}</h2></header>
+					<div class="row">
+						{% for post in blog_posts %}
+						<div class="col-6 col-12-small">
+							<section class="box">
+								<a href="#" class="image featured"><img src="images/{{ post.img }}" alt="" /></a>
+								<header><h3>{{ post.title }}</h3><p>{{ post.time }}</p></header>
+								<p>{{ post.desc }}</p>
+								<footer>
+									<ul class="actions">
+										<li><a href="#" class="button icon solid fa-file-alt">{{ lang.get('blog.continue_reading') }}</a></li>
+										<li><a href="#" class="button alt icon solid fa-comment">{{ post.comments }} {{ lang.get('blog.comments') }}</a></li>
+									</ul>
+								</footer>
+							</section>
+						</div>
+						{% endfor %}
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

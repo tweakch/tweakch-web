@@ -1,0 +1,53 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block content %}
+<!-- Main -->
+<section id="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-8 col-12-medium">
+                <!-- Main Content -->
+                <article class="box post">
+                    <a href="#" class="image featured"><img src="images/{{ main_content.image }}" alt="" /></a>
+                    <header>
+                        <h2>{{ main_content.title }}</h2>
+                        <p>{{ main_content.subtitle }}</p>
+                    </header>
+                    {% for paragraph in main_content.paragraphs %}
+                        <p>{{ paragraph }}</p>
+                    {% endfor %}
+                    
+                    {% for section in main_content.sections %}
+                        <section>
+                            <header><h3>{{ section.title }}</h3></header>
+                            {% for paragraph in section.paragraphs %}
+                                <p>{{ paragraph }}</p>
+                            {% endfor %}
+                        </section>
+                    {% endfor %}
+                </article>
+            </div>
+            <div class="col-4 col-12-medium">
+                <!-- Sidebar Content -->
+                {% for sidebar_item in sidebar_items %}
+                <section class="box">
+                    {% if sidebar_item.image %}
+                        <a href="#" class="image featured"><img src="images/{{ sidebar_item.image }}" alt="" /></a>
+                    {% endif %}
+                    <header><h3>{{ sidebar_item.title }}</h3></header>
+                    <p>{{ sidebar_item.description }}</p>
+                    {% if sidebar_item.links %}
+                        <ul class="divided">
+                            {% for link in sidebar_item.links %}
+                                <li><a href="#">{{ link }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    <footer><a href="#" class="button alt">{{ sidebar_item.button_text }}</a></footer>
+                </section>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
