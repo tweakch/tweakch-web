@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html.twig' %}
+
+{# Flexible two-/three-column capable layout.
+   Pass in optional raw HTML fragments: sidebar_left, sidebar_right.
+   Child templates override blocks sidebar_left/sidebar_right/main_content if needed. #}
+
+{% block content %}
+<section id="main">
+    <div class="container">
+        <div class="row flexible-layout"
+             data-has-left="{{ sidebar_left ? '1':'0' }}"
+             data-has-right="{{ sidebar_right ? '1':'0' }}">
+            {# LEFT SIDEBAR #}
+            {% if sidebar_left %}
+                <div id="sidebar-left"
+                     class="{% if sidebar_right %}col-3{% else %}col-4{% endif %} col-12-medium sidebar sidebar--left">
+                    {% block sidebar_left %}{{ sidebar_left|raw }}{% endblock %}
+                </div>
+            {% endif %}
+
+            {# MAIN COLUMN #}
+            {% set main_classes = [] %}
+            {% if not sidebar_left and not sidebar_right %}
+                {% set main_classes = ['col-12'] %}
+            {% elseif sidebar_left and sidebar_right %}
+                {% set main_classes = ['col-6','col-12-medium'] %}
+            {% else %}
+                {% set main_classes = ['col-8','col-12-medium'] %}
+            {% endif %}
+            <div class="{{ main_classes|join(' ') }} main-column">
+                {% block main_content %}{% endblock %}
+            </div>
+
+            {# RIGHT SIDEBAR #}
+            {% if sidebar_right %}
+                <div id="sidebar-right"
+                     class="{% if sidebar_left %}col-3{% else %}col-4{% endif %} col-12-medium sidebar sidebar--right">
+                    {% block sidebar_right %}{{ sidebar_right|raw }}{% endblock %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

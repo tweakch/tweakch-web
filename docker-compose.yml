@@ -1,0 +1,73 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: dopetrope-php
+    volumes:
+      - ./:/var/www/html:delegated
+    environment:
+      PHP_DISPLAY_ERRORS: 1
+    networks:
+      - dopetrope-net
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: dopetrope-nginx
+    depends_on:
+      - php
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html:ro
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - dopetrope-net
+
+  db:
+    image: mariadb:11.3
+    container_name: dopetrope-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpass}
+      MYSQL_DATABASE: ${DB_NAME:-dopetrope}
+      MYSQL_USER: ${DB_USER:-dopetrope}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-dopetrope123}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - dopetrope-net
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: dopetrope-phpmyadmin
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_USER: ${DB_USER:-dopetrope}
+      PMA_PASSWORD: ${DB_PASSWORD:-dopetrope123}
+    ports:
+      - "8081:80"
+    networks:
+      - dopetrope-net
+
+  sass:
+    image: node:20-alpine
+    container_name: dopetrope-sass
+    working_dir: /workspace
+    command: sh -c "npm install --no-audit --no-fund sass@1 && npx sass --style=expanded --no-source-map assets/sass/main.scss assets/css/main.css"
+    volumes:
+      - ./:/workspace
+    profiles: ["dev"]
+    # Run on-demand: docker compose run --rm sass
+    # For watch mode override command: npx sass --watch assets/sass/main.scss:assets/css/main.css
+    networks:
+      - dopetrope-net
+
+networks:
+  dopetrope-net:
+    driver: bridge
+
+volumes:
+  db_data:

@@ -1,0 +1,28 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block content %}
+<!-- Main -->
+<section id="main">
+    <div class="container">
+        <article class="box post">
+            <a href="#" class="image featured"><img src="images/{{ main_content.image }}" alt="" /></a>
+            <header>
+                <h2>{{ main_content.title }}</h2>
+                <p>{{ main_content.subtitle }}</p>
+            </header>
+            {% for paragraph in main_content.paragraphs %}
+                <p>{{ paragraph }}</p>
+            {% endfor %}
+            
+            {% for section in main_content.sections %}
+                <section>
+                    <header><h3>{{ section.title }}</h3></header>
+                    {% for paragraph in section.paragraphs %}
+                        <p>{{ paragraph }}</p>
+                    {% endfor %}
+                </section>
+            {% endfor %}
+        </article>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,12 @@
+{# Reusable Table of Contents component #}
+{% if toc_html is defined and toc_html %}
+<section class="box">
+  <nav class="toc" aria-label="Table of contents">
+    <h3>On this page</h3>
+    <div class="toc-body">
+      {{ toc_html|raw }}
+    </div>
+  </nav>
+</section>
+
+{% endif %}

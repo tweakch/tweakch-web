@@ -1,0 +1,112 @@
+{% extends 'layouts/flexible.html.twig' %}
+
+{% block page_meta %}
+        {% if post.description %}<meta name="description" content="{{ post.description }}" />{% endif %}
+        {% if seo.keywords %}<meta name="keywords" content="{{ seo.keywords }}" />{% endif %}
+        {% if post.author %}<meta name="author" content="{{ post.author }}" />{% endif %}
+        {% if post.published %}<meta name="article:published_time" content="{{ post.published }}" />{% endif %}
+{% endblock %}
+
+{% block page_styles %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+    <style>
+        .blog-content h1,.blog-content h2,.blog-content h3,.blog-content h4,.blog-content h5,.blog-content h6{line-height:1.25}
+        .blog-content h1:first-child{margin-top:0}
+        pre{background:#0d1117;color:#e6edf3;padding:1.25rem 1.5rem;border-radius:8px;overflow:auto;margin:1.5rem 0;font-size:.9rem;line-height:1.5;position:relative}
+        code{background:#f6f8fa;color:#24292f;padding:.15rem .4rem;border-radius:3px;font-size:.9em;font-family:Consolas,Monaco,'Courier New',monospace}
+        pre code{background:transparent;padding:0;color:inherit}
+        .code-block-container{position:relative}
+        .copy-btn{position:absolute;top:8px;right:8px;background:#238636;color:#fff;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:.7rem;opacity:.85;transition:opacity .2s ease}
+        .copy-btn:hover{opacity:1;background:#2ea043}
+        .copy-btn.copied{background:#1f883d}
+        .table-of-contents{background:#f7fafc;padding:1.25rem 1.25rem;border-radius:6px;margin:1.75rem 0;border:1px solid #e2e8f0}
+        .toc-list{list-style:none;margin:0;padding:0}
+        .toc-list li{margin:.45rem 0}
+        .toc-level-2{padding-left:0}.toc-level-3{padding-left:1rem}.toc-level-4{padding-left:2rem}.toc-level-5{padding-left:3rem}.toc-level-6{padding-left:4rem}
+        .toc-link{color:#2d3748;text-decoration:none;display:block;padding:.2rem 0;border-radius:3px;transition:all .18s ease}
+        .toc-link:hover{background:#e2e8f0;color:#1a365d;padding-left:.4rem}
+        /* Metadata component styles */
+        .meta-box-inline{padding:1.1rem 1.25rem}
+        .meta-list{list-style:none;margin:0 0 .75rem;padding:0;font-size:.85rem}
+        .meta-list li{margin:.35rem 0}
+        .tag-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.4rem}
+        .tag-item{background:#e2e8f0;color:#2d3748;padding:.3rem .55rem;border-radius:3px;font-size:.65rem;line-height:1;font-weight:500}
+        .blog-navigation{margin-top:2rem;padding-top:1.75rem;border-top:1px solid #e2e8f0}
+        .post-meta{color:#666;font-size:.8rem;margin:.35rem 0}
+        @media (max-width:736px){.meta-box-inline{padding:1rem}.table-of-contents{padding:1rem}.copy-btn{position:static;display:block;margin:.5rem 0 0;width:auto}}
+    </style>
+{% endblock %}
+
+{# Main content area now placed into flexible layout's main_content block #}
+{% block main_content %}
+    <article class="box post blog-content">
+        <a href="#" class="image featured"><img src="images/pic01.png" alt=""></a>
+        <header>
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.subtitle }}</p>
+        </header>
+
+        {# Metadata inline only when variant requests it #}
+        {% if metadata_variant == 'inline' %}
+            {% include 'components/blog/_metadata.html.twig' with { placement: 'inline' } %}
+        {% endif %}
+
+        {# Inline TOC only if variant requests it; metadata stays above it #}
+        {% if toc_variant == 'inline' %}
+            {% include 'components/blog/_toc.html.twig' with { toc_html: toc_html } %}
+        {% endif %}
+
+        <div class="blog-content">{{ post.content|raw }}</div>
+
+        <div class="blog-navigation">
+            <div class="row">
+                <div class="col-6 col-12-small"><a href="blog.php" class="button">&larr; Back to Blog</a></div>
+                <div class="col-6 col-12-small"><a href="#top" class="button alt">Back to Top &uarr;</a></div>
+            </div>
+        </div>
+
+        {% if relatedPosts is defined and relatedPosts|length > 0 %}
+            <div style="margin-top:2rem;padding-top:1.75rem;border-top:1px solid #e2e8f0;">
+                <h3>Related Posts</h3>
+                <div class="row">
+                    {% for relatedPost in relatedPosts %}
+                        <div class="col-4 col-12-small" style="margin-bottom:1rem;">
+                            <section class="box">
+                                <a href="blog.php?post={{ relatedPost.post }}" class="image featured"><img src="images/pic0{{ loop.index % 10 + 1 }}.jpg" alt="{{ relatedPost.title }}" /></a>
+                                <header><h4><a href="blog.php?post={{ relatedPost.post }}">{{ relatedPost.title }}</a></h4><p class="post-meta">{% if relatedPost.published %}<time datetime="{{ relatedPost.published }}">{{ relatedPost.published }}</time>{% endif %}</p></header>
+                                <footer><ul class="actions"><li><a class="button alt" href="blog.php?post={{ relatedPost.post }}">Read More</a></li></ul></footer>
+                            </section>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </article>
+{% endblock %}
+
+{# Sidebars now fully composed in controller; no overrides required. #}
+
+{% block page_scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/sql.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            hljs.highlightAll();
+            document.querySelectorAll('pre code').forEach(function(block){
+                const pre=block.parentNode;const wrap=document.createElement('div');wrap.className='code-block-container';
+                const btn=document.createElement('button');btn.className='copy-btn';btn.textContent='Copy';btn.title='Copy code';
+                btn.addEventListener('click',function(){const text=block.textContent;if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(()=>{btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},1800);}).catch(()=>flashFail());}else{fallbackCopy(text);} });
+                function flashFail(){btn.textContent='Failed';setTimeout(()=>{btn.textContent='Copy';},1500);} 
+                function fallbackCopy(text){const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');btn.textContent='Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},1800);}catch(e){flashFail();}document.body.removeChild(ta);} 
+                pre.parentNode.insertBefore(wrap,pre);wrap.appendChild(pre);wrap.appendChild(btn);
+            });
+            document.querySelectorAll('.toc-link').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const id=a.getAttribute('href').substring(1);const t=document.getElementById(id);if(t){t.scrollIntoView({behavior:'smooth',block:'start'});}}));
+            document.querySelector('a[href="#top"]')?.addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});});
+        });
+    </script>
+{% endblock %}

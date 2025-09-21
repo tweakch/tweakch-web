@@ -1,0 +1,20 @@
+{% set project = project|default({}) %}
+{% set hasTech = project.tech is defined and project.tech is iterable and project.tech|length > 0 %}
+{% set hasTags = project.tags is defined and project.tags is iterable and project.tags|length > 0 %}
+<section class="box {{ placement == 'inline' ? 'details-inline' : 'details-sidebar' }}">
+  <header><h3>Project Details</h3></header>
+  <ul class="details-list">
+    {% if project.client %}<li><strong>Client:</strong> {{ project.client }}</li>{% endif %}
+    {% if project.role %}<li><strong>Role:</strong> {{ project.role }}</li>{% endif %}
+    {% if hasTech %}<li><strong>Tech:</strong>
+      <span class="tech-list">
+        {% for t in project.tech %}<span class="tech-item">{{ t }}</span>{% endfor %}
+      </span>
+    </li>{% endif %}
+  </ul>
+  {% if hasTags %}
+    <div class="details-tags">
+      {% for tag in project.tags %}<span class="tag-item">{{ tag }}</span>{% endfor %}
+    </div>
+  {% endif %}
+</section>

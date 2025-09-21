@@ -1,112 +1,21 @@
 @import url("fontawesome-all.min.css");
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900,300italic");
 /*
-COLORS
+	Dopetrope by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
-/*
-        Dopetrope by HTML5 UP
-        html5up.net | @ajlkn
-        Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
-/* Modern Mobile CSS Improvements */
-@supports (touch-action: manipulation) {
-  /* Optimize for touch devices - limit to interactive elements only */
-  a, button, .button, input[type=button], input[type=submit], input[type=reset] {
-    touch-action: manipulation;
-  }
-}
-/* Safe area padding for outer wrappers */
-#page-wrapper, #header, #footer {
-  padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right));
-}
-
-/* Improved mobile scrolling */
-@media screen and (max-width: 736px) {
-  body {
-    -webkit-overflow-scrolling: touch;
-  }
-}
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
+html, body, div, span, applet, object,
+iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
+pre, a, abbr, acronym, address, big, cite,
+code, del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b,
+u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+form, label, legend, table, caption, tbody,
+tfoot, thead, tr, th, td, article, aside,
+canvas, details, embed, figure, figcaption,
+footer, header, hgroup, menu, nav, output, ruby,
+section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -115,17 +24,8 @@ video {
   vertical-align: baseline;
 }
 
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
@@ -133,18 +33,14 @@ body {
   line-height: 1;
 }
 
-ol,
-ul {
+ol, ul {
   list-style: none;
 }
 
-blockquote,
-q {
+blockquote, q {
   quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before,
-q:after {
+blockquote:before, blockquote:after, q:before, q:after {
   content: "";
   content: none;
 }
@@ -168,9 +64,7 @@ input::-moz-focus-inner {
   padding: 0;
 }
 
-input,
-select,
-textarea {
+input, select, textarea {
   -moz-appearance: none;
   -webkit-appearance: none;
   -ms-appearance: none;
@@ -182,19 +76,15 @@ html {
   box-sizing: border-box;
 }
 
-*,
-*:before,
-*:after {
+*, *:before, *:after {
   box-sizing: inherit;
 }
 
 body {
   background: #252122;
-  background-image: url("images/bg.png");
+  background-image: url("images/bg02.png");
 }
-body.is-preload *,
-body.is-preload *:before,
-body.is-preload *:after {
+body.is-preload *, body.is-preload *:before, body.is-preload *:after {
   -moz-animation: none !important;
   -webkit-animation: none !important;
   -ms-animation: none !important;
@@ -205,25 +95,20 @@ body.is-preload *:after {
   transition: none !important;
 }
 
-body,
-input,
-textarea,
-select {
+body, input, textarea, select {
   font-family: "Source Sans Pro";
   font-weight: 300;
   color: #5d5d5d;
-  font-size: 16pt;
-  line-height: 1.5em;
+  font-size: 14pt;
+  line-height: 1.75em;
 }
 
-strong,
-b {
+strong, b {
   color: #252122;
   font-weight: 400;
 }
 
-i,
-em {
+i, em {
   font-style: italic;
 }
 
@@ -245,22 +130,12 @@ blockquote {
   font-style: italic;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   color: #252122;
   font-weight: 700;
 }
 
-h1 a,
-h2 a,
-h3 a,
-h4 a,
-h5 a,
-h6 a {
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   color: inherit;
   text-decoration: none;
 }
@@ -292,11 +167,7 @@ hr {
   margin: 2em 0 2em 0;
 }
 
-p,
-ul,
-ol,
-dl,
-table {
+p, ul, ol, dl, table {
   margin-bottom: 2em;
 }
 
@@ -1324,13 +1195,10 @@ table thead {
 }
 
 /* Section/Article */
-section,
-article {
+section, article {
   margin-bottom: 2.5em;
 }
-section > :last-child, section:last-child,
-article > :last-child,
-article:last-child {
+section > :last-child, section:last-child, article > :last-child, article:last-child {
   margin-bottom: 0;
 }
 
@@ -1435,42 +1303,42 @@ input[type=submit].alt,
 input[type=reset].alt,
 button.alt,
 .button.alt {
-  background: #00aba9;
+  background: #252122;
 }
 input[type=button].alt:hover,
 input[type=submit].alt:hover,
 input[type=reset].alt:hover,
 button.alt:hover,
 .button.alt:hover {
-  background: rgb(0, 192.42, 190.1694736842);
+  background: #353132;
 }
 input[type=button].alt:active,
 input[type=submit].alt:active,
 input[type=reset].alt:active,
 button.alt:active,
 .button.alt:active {
-  background: rgb(0, 192.42, 190.1694736842);
+  background: #151112;
 }
-input[type=button].promote,
-input[type=submit].promote,
-input[type=reset].promote,
-button.promote,
-.button.promote {
-  background: #ffc425;
+input[type=button].alt2,
+input[type=submit].alt2,
+input[type=reset].alt2,
+button.alt2,
+.button.alt2 {
+  background: #827a7c;
 }
-input[type=button].promote:hover,
-input[type=submit].promote:hover,
-input[type=reset].promote:hover,
-button.promote:hover,
-.button.promote:hover {
-  background: rgb(255, 201.7971559633, 58.42);
+input[type=button].alt2:hover,
+input[type=submit].alt2:hover,
+input[type=reset].alt2:hover,
+button.alt2:hover,
+.button.alt2:hover {
+  background: #948c8e;
 }
-input[type=button].promote:active,
-input[type=submit].promote:active,
-input[type=reset].promote:active,
-button.promote:active,
-.button.promote:active {
-  background: rgb(255, 201.7971559633, 58.42);
+input[type=button].alt2:active,
+input[type=submit].alt2:active,
+input[type=reset].alt2:active,
+button.alt2:active,
+.button.alt2:active {
+  background: #6a6365;
 }
 input[type=button].icon:before,
 input[type=submit].icon:before,
@@ -1626,18 +1494,6 @@ ul.dates .date:after {
   border-top: solid 1.8em transparent;
   border-bottom: solid 1.8em transparent;
 }
-ul.dates .date.done {
-  background-color: #00b159;
-}
-ul.dates .date.done:after {
-  border-left: solid 1.25em #00b159;
-}
-ul.dates .date.current {
-  background-color: #00aba9;
-}
-ul.dates .date.current:after {
-  border-left: solid 1.25em #00aba9;
-}
 ul.dates .date strong {
   display: block;
   font-size: 1.75em;
@@ -1704,87 +1560,41 @@ ul.social li a:before {
   font-size: 2em;
   line-height: 1.5em;
 }
+ul.social li a.fa-facebook {
+  background: #3c5a98;
+}
+ul.social li a.fa-facebook:hover {
+  background: #4c6aa8;
+}
 ul.social li a.fa-twitter {
-  background: #00aba9;
+  background: #2daae4;
 }
 ul.social li a.fa-twitter:hover {
-  background: rgb(0, 196.5, 194.201754386);
+  background: #3dbaf4;
 }
-ul.social li a.fa-youtube {
-  background: #00aba9;
+ul.social li a.fa-dribbble {
+  background: #c4376b;
 }
-ul.social li a.fa-youtube:hover {
-  background: rgb(0, 196.5, 194.201754386);
-}
-ul.social li a.fa-telegram {
-  background: #00aba9;
-}
-ul.social li a.fa-telegram:hover {
-  background: rgb(0, 196.5, 194.201754386);
-}
-ul.social li a.fa-discord {
-  background: #00aba9;
-}
-ul.social li a.fa-discord:hover {
-  background: rgb(0, 196.5, 194.201754386);
+ul.social li a.fa-dribbble:hover {
+  background: #d4477b;
 }
 ul.social li a.fa-linkedin {
-  background: #00aba9;
+  background: #006599;
 }
 ul.social li a.fa-linkedin:hover {
-  background: rgb(0, 196.5, 194.201754386);
+  background: #1075a9;
 }
 ul.social li a.fa-tumblr {
-  background: #00aba9;
+  background: #2b4661;
 }
 ul.social li a.fa-tumblr:hover {
-  background: rgb(0, 196.5, 194.201754386);
+  background: #3b5671;
 }
-ul.social li a.fa-medium {
-  background: #00aba9;
+ul.social li a.fa-google-plus {
+  background: #da2713;
 }
-ul.social li a.fa-medium:hover {
-  background: rgb(0, 196.5, 194.201754386);
-}
-ul.social li a.fa-reddit {
-  background: #00aba9;
-}
-ul.social li a.fa-reddit:hover {
-  background: rgb(0, 196.5, 194.201754386);
-}
-
-.mb-0 {
-  margin-bottom: 0em;
-}
-
-/* Badges */
-.badge {
-  background-color: teal;
-  display: inline-block;
-  color: #fff;
-  padding-left: 8px;
-  padding-right: 8px;
-  margin-left: 1px;
-  margin-right: 1px;
-  text-align: center;
-  border-radius: 5px;
-  font-size: smaller;
-}
-
-.badge-connect {
-  background-color: #d11141;
-}
-
-.badge-educate {
-  background-color: #00b159;
-}
-
-.badge-build {
-  background-color: #00aedb;
-}
-
-.badge-promote {
-  background-color: #ffc425;
+ul.social li a.fa-google-plus:hover {
+  background: #ea3723;
 }
 
 /* Icons */
@@ -1822,7 +1632,7 @@ ul.social li a.fa-reddit:hover {
 .icon.featured {
   position: relative;
   display: inline-block;
-  background-color: #d11141;
+  background-color: #d52349;
   width: 9em;
   padding: 1.75em 0 0.75em 0;
   border-top-left-radius: 5px;
@@ -1840,15 +1650,15 @@ ul.social li a.fa-reddit:hover {
   position: absolute;
   bottom: -1.95em;
   left: 0;
-  border-top: solid 2em #d11141;
+  border-top: solid 2em #d52349;
   border-left: solid 4.5em transparent;
   border-right: solid 4.5em transparent;
 }
 .icon.featured.alt {
-  background-color: #00aba9;
+  background-color: #252122;
 }
 .icon.featured.alt:after {
-  border-top-color: #00aba9;
+  border-top-color: #252122;
 }
 .icon.featured.alt2 {
   background-color: #827a7c;
@@ -1856,52 +1666,10 @@ ul.social li a.fa-reddit:hover {
 .icon.featured.alt2:after {
   border-top-color: #827a7c;
 }
-.icon.featured.alt3 {
-  background-color: #ffc425;
-}
-.icon.featured.alt3:after {
-  border-top-color: #ffc425;
-}
-.icon.featured.alt4 {
-  background-color: #00aedb;
-}
-.icon.featured.alt4:after {
-  border-top-color: #00aedb;
-}
-.icon.featured.alt5 {
-  background-color: #00b159;
-}
-.icon.featured.alt5:after {
-  border-top-color: #00b159;
-}
-
-.page-up {
-  font-weight: 900;
-  font-size: smaller;
-}
 
 /* Page Wrapper */
 #page-wrapper > section {
   margin-bottom: 0;
-}
-
-/* Alert */
-.alert {
-  margin: 1em 0 1em 0;
-  padding: 1.5em;
-  color: white;
-}
-.alert.danger {
-  background-color: #fca6a0;
-}
-.alert.success {
-  background-color: #8bd1b7;
-}
-.alert.info {
-  background-color: #9acdf7;
-}
-.alert.warn {
-  background-color: #fdd190;
 }
 
 /* Header */
@@ -1909,7 +1677,7 @@ ul.social li a.fa-reddit:hover {
   position: relative;
   background: #ffffff;
   border-bottom: solid 1px #ccc;
-  padding: 1em 0 3em 0;
+  padding: 5em 0 4em 0;
   text-align: center;
 }
 #header h1 {
@@ -1922,7 +1690,7 @@ ul.social li a.fa-reddit:hover {
 
 /* Nav */
 #nav {
-  margin: 1em 0 -1.5em 0;
+  margin: 2.5em 0 0 0;
 }
 #nav > ul {
   margin: 0;
@@ -1950,43 +1718,37 @@ ul.social li a.fa-reddit:hover {
   background: #f3f3f3;
 }
 #nav > ul > li.current > a {
-  background: #00aba9;
+  background: #d52349;
   color: #fff !important;
   font-weight: 700;
 }
 
 .dropotron {
   border-radius: 5px;
-  background-color: #F2F1EF;
-  background-color: rgba(242, 241, 239, 0.98);
+  background-color: #252122;
+  background-color: rgba(34, 30, 31, 0.98);
   padding: 1.25em 1.5em 1.25em 1.5em;
   font-style: italic;
   min-width: 13em;
-  box-shadow: 0px 8px 15px 0px rgba(242, 241, 239, 0.25);
+  box-shadow: 0px 8px 15px 0px rgba(0, 0, 0, 0.5);
   text-align: left;
   margin-top: -1.25em;
   margin-left: -1px;
   list-style: none;
 }
-.dropotron a,
-.dropotron span {
-  color: rgb(70, 70, 70);
+.dropotron a, .dropotron span {
+  color: #aaa;
   text-decoration: none;
   -moz-transition: color .25s ease-in-out;
   -webkit-transition: color .25s ease-in-out;
   -ms-transition: color .25s ease-in-out;
   transition: color .25s ease-in-out;
 }
-.dropotron a > i,
-.dropotron span > i {
-  color: #a5a5a5 !important;
-}
 .dropotron li {
   padding: 0.25em 0 0.25em 0;
 }
-.dropotron li:hover > a,
-.dropotron li:hover > span {
-  color: black;
+.dropotron li:hover > a, .dropotron li:hover > span {
+  color: #fff;
 }
 .dropotron.level-0 {
   margin-top: 2em;
@@ -2000,25 +1762,25 @@ ul.social li a.fa-reddit:hover {
   top: -9px;
   border-left: solid 10px transparent;
   border-right: solid 10px transparent;
-  border-bottom: solid 10px #F2F1EF;
-  border-bottom-color: rgba(242, 241, 239, 0.98);
+  border-bottom: solid 10px #252122;
+  border-bottom-color: rgba(34, 30, 31, 0.98);
 }
 
 /* Banner */
 #banner {
-  background: rgb(249.7162162162, 249.4054054054, 248.7837837838) url("../../images/ada03.jpg");
+  background: #CCE8F4 url("../../images/pic01.png");
   background-position: center center;
   background-size: auto 100%;
   background-repeat: no-repeat;
   text-align: center;
   position: relative;
   padding: 8em 0;
-  margin: 3.5em 0 0 0;
+  margin: 4em 0 0 0;
 }
 #banner header {
   background-color: rgba(34, 30, 31, 0.98);
   display: inline-block;
-  padding: 2em 4em;
+  padding: 2.5em 5em;
   border-radius: 5px;
 }
 #banner header h2 {
@@ -2033,9 +1795,6 @@ ul.social li a.fa-reddit:hover {
   font-style: normal;
   margin: 0;
   font-size: 1.5em;
-}
-#banner header p.small {
-  font-size: small;
 }
 
 /* Intro */
@@ -2052,81 +1811,6 @@ ul.social li a.fa-reddit:hover {
 }
 #intro p {
   margin: 0;
-}
-#intro .first {
-  position: relative;
-  z-index: 1;
-}
-#intro .first:before {
-  content: "";
-  width: 32px;
-  height: 100%;
-  position: absolute;
-  left: -24px;
-  top: 0;
-  display: block;
-  z-index: -1;
-}
-#intro .first:after {
-  content: "";
-  width: 32px;
-  height: 100%;
-  position: absolute;
-  right: -24px;
-  top: 0;
-  display: block;
-  z-index: -1;
-  box-shadow: -32px 0 0 0 #fff, 0 -32px 0 0 #fff, 0 32px 0 0 #fff, -32px 32px 0 0 #fff, -32px -32px 0 0 #fff, 0 0 32px 0 rgba(0, 0, 0, 0.15);
-}
-#intro .left-center {
-  position: relative;
-  z-index: 1;
-}
-#intro .left-center:before {
-  content: "";
-  width: 32px;
-  height: 100%;
-  position: absolute;
-  left: -24px;
-  top: 0;
-  display: block;
-  z-index: -1;
-}
-#intro .left-center:after {
-  content: "";
-  width: 32px;
-  height: 100%;
-  position: absolute;
-  right: -24px;
-  top: 0;
-  display: block;
-  z-index: -1;
-  box-shadow: -32px 0 0 0 #fff, 0 -32px 0 0 #fff, 0 32px 0 0 #fff, -32px 32px 0 0 #fff, -32px -32px 0 0 #fff, 0 0 32px 0 rgba(0, 0, 0, 0.15);
-}
-#intro .right-center {
-  position: relative;
-  z-index: 1;
-}
-#intro .right-center:before {
-  content: "";
-  width: 32px;
-  height: 100%;
-  position: absolute;
-  left: -24px;
-  top: 0;
-  display: block;
-  z-index: -1;
-}
-#intro .right-center:after {
-  content: "";
-  width: 32px;
-  height: 100%;
-  position: absolute;
-  right: -24px;
-  top: 0;
-  display: block;
-  z-index: -1;
-  box-shadow: -32px 0 0 0 #fff, 0 -32px 0 0 #fff, 0 32px 0 0 #fff, -32px 32px 0 0 #fff, -32px -32px 0 0 #fff, 0 0 32px 0 rgba(0, 0, 0, 0.15);
 }
 #intro .middle {
   position: relative;
@@ -2164,7 +1848,7 @@ ul.social li a.fa-reddit:hover {
 /* Main */
 #main {
   position: relative;
-  background: #f7f7f7 url("images/bg.png");
+  background: #f7f7f7 url("images/bg02.png");
   padding: 4em 0 4em 0;
 }
 #main:before {
@@ -2173,13 +1857,13 @@ ul.social li a.fa-reddit:hover {
   top: 0;
   left: 0;
   width: 100%;
-  background: url("images/bg.png");
+  background: url("images/bg01.png");
   background-size: 100% 100%;
   z-index: 0;
   opacity: 0.1;
 }
 #main .major h2 {
-  background: #f7f7f7 url("images/bg.png");
+  background: #f7f7f7 url("images/bg02.png");
 }
 
 /* Footer */
@@ -2194,7 +1878,7 @@ ul.social li a.fa-reddit:hover {
   top: 0;
   left: 0;
   width: 100%;
-  background: url("images/bg.png");
+  background: url("images/bg01.png");
   background-size: 100% 100%;
   z-index: 0;
   opacity: 0.5;
@@ -2202,22 +1886,10 @@ ul.social li a.fa-reddit:hover {
 #footer a {
   color: #c5c4c4;
 }
-#footer h2,
-#footer h3,
-#footer h4,
-#footer h5,
-#footer h6,
-#footer strong,
-#footer b {
+#footer h2, #footer h3, #footer h4, #footer h5, #footer h6, #footer strong, #footer b {
   color: #fff;
 }
-#footer h2 a,
-#footer h3 a,
-#footer h4 a,
-#footer h5 a,
-#footer h6 a,
-#footer strong a,
-#footer b a {
+#footer h2 a, #footer h3 a, #footer h4 a, #footer h5 a, #footer h6 a, #footer strong a, #footer b a {
   color: inherit;
 }
 #footer ul.contact li, #footer ul.dates li, #footer ul.divided li {
@@ -2248,20 +1920,14 @@ ul.social li a.fa-reddit:hover {
 /* XLarge */
 @media screen and (max-width: 1680px) {
   /* Basic */
-  body,
-  input,
-  textarea,
-  select {
+  body, input, textarea, select {
     font-size: 12pt;
   }
 }
 /* Large */
 @media screen and (max-width: 1280px) {
   /* Basic */
-  body,
-  input,
-  textarea,
-  select {
+  body, input, textarea, select {
     font-size: 11pt;
   }
   /* Section/Article */
@@ -2278,21 +1944,6 @@ ul.social li a.fa-reddit:hover {
   /* Header */
   #header {
     padding: 4em 0 3em 0;
-    /* Navigation touch targets */
-  }
-  #header #nav ul li a {
-    min-height: 44px;
-    min-width: 44px;
-    padding: 12px 16px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
-  }
-  #header #nav ul li a:hover, #header #nav ul li a:focus {
-    background-color: rgba(0, 0, 0, 0.05);
   }
   /* Banner */
   #banner {
@@ -2335,29 +1986,14 @@ ul.social li a.fa-reddit:hover {
   }
 }
 /* Medium */
-#navPanel,
-#titleBar {
+#navPanel, #titleBar {
   display: none;
 }
 
 @media screen and (max-width: 980px) {
-  /* Typography improvements for better mobile readability */
-  body,
-  input,
-  textarea,
-  select {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-  /* Fluid typography for better mobile scaling */
-  h1 {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-  }
-  h2 {
-    font-size: clamp(1.4rem, 3.5vw, 1.8rem);
-  }
-  h3 {
-    font-size: clamp(1.2rem, 3vw, 1.5rem);
+  /* Basic */
+  html, body {
+    overflow-x: hidden;
   }
   /* Box */
   .box footer ul.actions li {
@@ -2394,12 +2030,6 @@ ul.social li a.fa-reddit:hover {
   }
   #intro section p {
     margin: 0;
-  }
-  #intro .left-center:before, #intro .left-center:after {
-    display: none;
-  }
-  #intro .right-center:before, #intro .right-center:after {
-    display: none;
   }
   #intro .middle:before, #intro .middle:after {
     display: none;
@@ -2507,13 +2137,12 @@ ul.social li a.fa-reddit:hover {
     width: 275px;
     z-index: 10002;
     color: #858484;
-    background-image: url("images/bg.png");
+    background-image: url("images/bg02.png");
     box-shadow: inset -3px 0px 5px 0px rgba(0, 0, 0, 0.35);
   }
   #navPanel .link {
     display: block;
     color: #888;
-    font-weight: bolder;
     text-decoration: none;
     height: 44px;
     line-height: 44px;
@@ -2569,69 +2198,34 @@ ul.social li a.fa-reddit:hover {
 /* Small */
 @media screen and (max-width: 736px) {
   /* Basic */
-  body,
-  input,
-  textarea,
-  select {
-    font-size: 16px;
-    line-height: 1.6;
+  body, input, textarea, select {
+    font-size: 11pt;
   }
-  /* Fluid typography for better mobile scaling */
-  h1 {
-    font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
-    line-height: 1.2;
-  }
-  h2 {
-    font-size: clamp(1.4rem, 3.5vw, 1.8rem) !important;
-    line-height: 1.3;
-  }
-  h3 {
-    font-size: clamp(1.2rem, 3vw, 1.5rem) !important;
-    line-height: 1.4;
-  }
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  h2, h3, h4, h5, h6 {
     font-size: 1.25em;
   }
   /* Button */
-  input[type=button],
-  input[type=submit],
-  input[type=reset],
-  button,
-  .button {
-    min-height: 44px; /* Touch-friendly minimum height */
-    min-width: 44px; /* Touch-friendly minimum width */
-    padding: 12px 24px; /* Better thumb-friendly padding */
-    font-size: 16px; /* Larger, more readable text */
-    border-radius: 8px; /* Modern rounded corners */
-  }
   input[type=button].large,
   input[type=submit].large,
   input[type=reset].large,
   button.large,
   .button.large {
-    font-size: 18px;
-    padding: 16px 32px;
-    min-height: 48px;
+    font-size: 1.1em;
+    padding: 0.65em 1.5em 0.65em 1.5em;
   }
   /* Actions */
   ul.actions li {
-    margin: 16px 0 0 0; /* Increased spacing for easier navigation */
+    margin: 1em 0 0 0;
     display: block;
   }
   ul.actions li .button {
     width: 100%;
-    text-align: center;
   }
   ul.actions li:first-child {
     margin-top: 0;
   }
   /* Section/Article */
-  section,
-  article {
+  section, article {
     margin-bottom: 20px;
   }
   header {
@@ -2642,50 +2236,24 @@ ul.social li a.fa-reddit:hover {
   }
   /* Box */
   .box {
-    padding: 24px 20px;
-    border-radius: 12px;
-    margin-bottom: 24px;
-    /* Removed touch-action from non-interactive container */
+    padding: 25px 15px 20px 15px;
   }
   .box .image.featured {
-    left: 20px;
-    top: 20px;
-    margin: -40px 0 24px -20px;
-    border-radius: 8px;
-    overflow: hidden;
+    left: 15px;
+    top: 15px;
+    margin: -40px 0 40px -30px;
   }
   .box.post header {
     padding-top: 0;
-    margin: 0 0 16px 0;
+    margin: 0 0 1em 0;
   }
   .box.post h2 {
-    font-size: 1.4em;
-    line-height: 1.3em;
-    margin-bottom: 12px;
+    font-size: 1.5em;
+    line-height: 1.5em;
   }
   .box.post header > p {
     margin-top: 0;
     font-size: 1em;
-    line-height: 1.4;
-  }
-  .box {
-    /* Project badges */
-  }
-  .box .badge {
-    display: inline-block;
-    margin: 4px 6px 4px 0;
-    padding: 6px 12px;
-    font-size: 14px;
-    border-radius: 20px;
-    font-weight: 600;
-  }
-  .box {
-    /* Footer buttons in project cards */
-  }
-  .box footer .actions li .button {
-    min-height: 40px;
-    font-size: 14px;
-    padding: 8px 16px;
   }
   /* Divided */
   ul.divided li {
@@ -2697,18 +2265,6 @@ ul.social li a.fa-reddit:hover {
   }
   ul.contact li h3 {
     top: 0.8em;
-  }
-  ul.contact li a {
-    min-height: 44px;
-    padding: 8px 12px;
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-  }
-  ul.contact li a:hover, ul.contact li a:focus {
-    background-color: rgba(255, 255, 255, 0.1);
   }
   /* Dates */
   ul.dates li {
@@ -2728,38 +2284,9 @@ ul.social li a.fa-reddit:hover {
     padding-top: 0;
     margin-top: 0;
   }
-  ul.links li a {
-    min-height: 44px;
-    padding: 8px 12px;
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-  }
-  ul.links li a:hover, ul.links li a:focus {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
   /* Social */
   ul.social li {
     margin: 0 0.5em 0.75em 0;
-  }
-  ul.social li a {
-    min-height: 44px;
-    min-width: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    padding: 8px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-  ul.social li a:before {
-    font-size: 20px;
-    line-height: 1;
   }
   /* Icons */
   .icon.featured {
@@ -2773,32 +2300,13 @@ ul.social li a.fa-reddit:hover {
   /* Header */
   #header {
     text-align: center;
-    padding: 24px 16px; /* Better mobile padding */
+    padding: 2em 0;
   }
   #header h1 {
     color: #252122;
     font-weight: 900;
     font-size: 1.75em;
     letter-spacing: -0.035em;
-    margin-bottom: 8px;
-  }
-  #header {
-    /* Navigation improvements */
-  }
-  #header nav ul li {
-    margin: 8px 0; /* Better touch spacing */
-  }
-  #header nav ul li a {
-    padding: 12px 16px; /* Improved touch targets */
-    min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
-  }
-  #header nav ul li a:hover, #header nav ul li a:focus {
-    background-color: rgba(209, 17, 65, 0.1);
   }
   /* Intro */
   #intro {
@@ -2813,23 +2321,21 @@ ul.social li a.fa-reddit:hover {
   }
   /* Banner */
   #banner {
-    padding: 48px 16px;
-    margin: 32px 0 0 0;
+    padding: 6em 0;
+    margin: 2em 0 0 0;
   }
   #banner header {
-    padding: 24px 20px;
+    padding: 1.5em 1em 1.5em 1em;
     display: block;
-    border-radius: 12px;
+    border-radius: 0;
   }
   #banner header h2 {
-    font-size: 1.75em; /* Larger for better mobile readability */
-    line-height: 1.3em;
-    margin: 0 0 12px 0;
+    font-size: 1.5em;
+    line-height: 1.5em;
+    margin: 0 0 0.25em 0;
   }
   #banner header p {
-    font-size: 1.1em;
-    line-height: 1.4;
-    margin-bottom: 0;
+    font-size: 1.2em;
   }
   /* Main */
   #main {
@@ -2838,30 +2344,5 @@ ul.social li a.fa-reddit:hover {
   /* Footer */
   #footer {
     padding: 40px 0 20px 0;
-    /* Footer link touch targets */
-  }
-  #footer a {
-    min-height: 44px;
-    padding: 8px 12px;
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-  }
-  #footer a:hover, #footer a:focus {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  #footer {
-    /* Copyright links */
-  }
-  #footer #copyright ul.links li a {
-    min-height: 44px;
-    padding: 12px 16px;
-    display: inline-flex;
-    align-items: center;
-    border-radius: 4px;
   }
 }
-
-/*# sourceMappingURL=main.css.map */

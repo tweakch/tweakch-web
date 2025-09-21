@@ -1,0 +1,50 @@
+<section>
+    <header>
+        <h2>{{ lang.get('footer.social.title') }}</h2>
+    </header>
+    
+    {# Social Media Links #}
+    <ul class="social">
+        {% set social_platforms = {
+            'facebook-f': 'facebook',
+            'twitter': 'twitter',
+            'dribbble': 'dribbble',
+            'tumblr': 'tumblr',
+            'linkedin-in': 'linkedin'
+        } %}
+        
+        {% for icon, platform in social_platforms %}
+            <li>
+                <a class="icon brands fa-{{ icon }}" href="#">
+                    <span class="label">
+                        {{ lang.get('footer.social.platforms.' ~ platform) }}
+                    </span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    {# Contact Information #}
+    <ul class="contact">
+        <li>
+            <h3>{{ lang.get('footer.contact.address.label') }}</h3>
+            <p>
+                {{ lang.get('footer.contact.address.company') }}<br />
+                {{ lang.get('footer.contact.address.street') }}<br />
+                {{ lang.get('footer.contact.address.city') }}
+            </p>
+        </li>
+        <li>
+            <h3>{{ lang.get('footer.contact.mail.label') }}</h3>
+            <p>
+                <a href="mailto:{{ lang.get('footer.contact.mail.email') }}">
+                    {{ lang.get('footer.contact.mail.email') }}
+                </a>
+            </p>
+        </li>
+        <li>
+            <h3>{{ lang.get('footer.contact.phone.label') }}</h3>
+            <p>{{ lang.get('footer.contact.phone.number') }}</p>
+        </li>
+    </ul>
+</section>

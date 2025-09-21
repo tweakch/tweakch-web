@@ -1,0 +1,31 @@
+<head>
+    <title>{{ page_title }}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="{{ meta_description|default(site.description) }}" />
+    <meta name="author" content="{{ site.author }}" />
+    
+    {# Base Open Graph Meta Tags (can be extended) #}
+    <meta property="og:title" content="{{ page_title }}" />
+    <meta property="og:description" content="{{ meta_description|default(site.description) }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ site.name }}" />
+    
+    {# Page-specific meta (SEO, article, social). Child templates override/append. #}
+    {% block page_meta %}{% endblock %}
+
+    {# Allow injecting extra head markup before styles (e.g., preload, dns-prefetch) #}
+    {% block page_head_extra %}{% endblock %}
+    
+    {# Core stylesheet #}
+    <link rel="stylesheet" href="assets/css/main.css" />
+    
+    {# Page-scoped stylesheets / inline styles #}
+    {% block page_styles %}{% endblock %}
+    
+    {# Legacy compatibility: keep additional_css aliasing page_styles if some pages still use it #}
+    {% block additional_css %}{% endblock %}
+    
+    {# Favicon #}
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+</head>
