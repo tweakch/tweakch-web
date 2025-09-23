@@ -24,7 +24,7 @@
 							{% endif %}
 
 							
-							<div class="col-4 col-12-medium">
+							<div class="col-4 col-12-small">
 								<section class="{{ section.class }}">
 									<i class="{{ icon_class }} {{ section.icon }}"></i>
 									<header><h2>{{ section.title }}</h2></header>
@@ -72,15 +72,14 @@
 					<header class="major"><h2>{{ lang.get('sections.blog.title') }}</h2></header>
 					<div class="row">
 						{% for post in blog_posts %}
-						<div class="col-6 col-12-small">
+						<div class="col-4 col-6-medium col-12-small">
 							<section class="box">
 								<a href="#" class="image featured"><img src="images/{{ post.img }}" alt="" /></a>
 								<header><h3>{{ post.title }}</h3><p>{{ post.time }}</p></header>
 								<p>{{ post.desc }}</p>
 								<footer>
 									<ul class="actions">
-										<li><a href="#" class="button icon solid fa-file-alt">{{ lang.get('blog.continue_reading') }}</a></li>
-										<li><a href="#" class="button alt icon solid fa-comment">{{ post.comments }} {{ lang.get('blog.comments') }}</a></li>
+										<li><a href="blog.php?post={{ post.post }}" class="button icon solid fa-file-alt">{{ lang.get('blog.continue_reading') }}</a></li>
 									</ul>
 								</footer>
 							</section>

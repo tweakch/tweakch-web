@@ -1,2 +1,0 @@
-# tweakch-web
-stakepool launchpad

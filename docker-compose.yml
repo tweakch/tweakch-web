@@ -5,9 +5,10 @@ services:
       dockerfile: docker/php/Dockerfile
     container_name: dopetrope-php
     volumes:
-      - ./:/var/www/html:delegated
+      - ./:/var/www/html
     environment:
       PHP_DISPLAY_ERRORS: 1
+      DISABLE_TWIG_CACHE: 1
     networks:
       - dopetrope-net
 
