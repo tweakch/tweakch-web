@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use Symfony\Component\Finder\Finder;
+use App\Domain\Mapper\BlogPostMapper;
+use App\Domain\Entity\BlogPost;
 
 class BlogService
 {
@@ -16,6 +18,31 @@ class BlogService
     public function getAllPosts(string $blogRootDir): array
     {
         return $this->contentService->listPosts($blogRootDir);
+    }
+
+    /**
+     * Return all blog posts as domain entities.
+     * @return BlogPost[]
+     */
+    public function getAllPostEntities(string $blogRootDir): array
+    {
+        $raw = $this->contentService->listPosts($blogRootDir);
+        $entities = [];
+        foreach ($raw as $p) {
+            $meta = $p['metadata'] ?? [];
+            $entities[] = BlogPostMapper::fromArray([
+                'slug' => $p['post'] ?? ($meta['slug'] ?? ''),
+                'title' => $p['title'] ?? ($meta['title'] ?? ''),
+                'markdown' => $p['raw_markdown'] ?? ($p['markdown'] ?? ''),
+                'published' => $p['published'] ?? ($meta['published'] ?? null),
+                'tags' => $meta['tags'] ?? [],
+                'featured' => $meta['featured'] ?? false,
+                'description' => $meta['description'] ?? null,
+                'keywords' => $meta['keywords'] ?? [],
+                'word_count' => $p['word_count'] ?? null,
+            ]);
+        }
+        return $entities;
     }
 
     /**

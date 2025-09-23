@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use Symfony\Component\Finder\Finder;
+use App\Domain\Mapper\PortfolioProjectMapper;
+use App\Domain\Entity\PortfolioProject;
 
 class PortfolioService
 {
@@ -49,6 +51,31 @@ class PortfolioService
     public function getAllProjects(string $portfolioRootDir): array
     {
         return $this->listProjects($portfolioRootDir);
+    }
+
+    /**
+     * Return all projects as domain entities.
+     * @return PortfolioProject[]
+     */
+    public function getAllProjectEntities(string $portfolioRootDir): array
+    {
+        $raw = $this->listProjects($portfolioRootDir);
+        $entities = [];
+        foreach ($raw as $p) {
+            $meta = $p['metadata'] ?? [];
+            $entities[] = PortfolioProjectMapper::fromArray([
+                'slug' => $p['slug'] ?? ($meta['slug'] ?? ''),
+                'title' => $p['title'] ?? ($meta['title'] ?? ''),
+                'summary' => $p['description'] ?? ($meta['description'] ?? ''),
+                'markdown' => $p['raw_markdown'] ?? ($p['markdown'] ?? ''),
+                'published' => $p['published'] ?? ($meta['published'] ?? null),
+                'tags' => $meta['tags'] ?? [],
+                'featured' => $meta['featured'] ?? false,
+                'description' => $meta['description'] ?? null,
+                'keywords' => $meta['keywords'] ?? [],
+            ]);
+        }
+        return $entities;
     }
 
     public function getFeaturedProjects(string $portfolioRootDir, int $limit = 6): array

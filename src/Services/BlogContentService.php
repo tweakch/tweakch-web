@@ -62,8 +62,8 @@ class BlogContentService
         // Ensure code blocks have highlight.js compatible classes
         $html = $this->normalizeCodeBlocks($html);
 
-        // Extract TOC headings by scanning generated HTML (since TableOfContentsExtension placeholder not used directly in template)
-        $toc = $this->extractHeadings($html);
+    // Extract TOC headings and inject ids into HTML
+    [$toc, $html] = $this->extractHeadings($html);
 
         $frontMatter = $this->enrichMetadata($frontMatter, $markdown, $html);
 
@@ -150,8 +150,6 @@ class BlogContentService
             foreach ($matches as $match) {
                 $text = strip_tags($match[2]);
                 $id = $this->slugify->slugify($text);
-                // Ensure the heading has the id attribute
-                // Replace in HTML only if not present (defer replacement to caller if needed)
                 $toc[] = [
                     'level' => (int)$match[1],
                     'text' => $text,
@@ -159,13 +157,13 @@ class BlogContentService
                 ];
             }
         }
-        // Inject ids (simple approach)
+        // Inject ids only where missing (first occurrence of each text)
         foreach ($toc as $entry) {
-            $pattern = sprintf('/<h([2-6])(?![^>]*id=")([^>]*)>%s<\/h\1>/', preg_quote($entry['text'], '/'));
+            $pattern = sprintf('/<h([2-6])(?![^>]*id=")(.*?)>%s<\/h\1>/', preg_quote($entry['text'], '/'));
             $replacement = sprintf('<h$1 id="%s"$2>%s</h$1>', $entry['id'], $entry['text']);
             $html = preg_replace($pattern, $replacement, $html, 1);
         }
-        return $toc;
+        return [$toc, $html];
     }
 
     private function enrichMetadata(array $meta, string $markdown, string $html): array

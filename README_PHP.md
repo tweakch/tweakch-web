@@ -21,6 +21,26 @@ From this directory run:
 php -S localhost:8000
 ```
 
+### Running Tests
+
+Install dependencies (including dev):
+
+```bash
+composer install
+```
+
+Run the test suite:
+
+```bash
+vendor/bin/phpunit
+```
+
+Static analysis (non-blocking in CI):
+
+```bash
+vendor/bin/phpstan analyse --no-progress
+```
+
 Then open: <http://localhost:8000/index.php>
 
 ## Next Steps (Suggested)

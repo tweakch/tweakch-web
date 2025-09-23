@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use DateTimeImmutable;
+use App\Domain\Service\RecentItemsAggregator;
 
 class PostService
 {
@@ -20,33 +21,25 @@ class PostService
      */
     public function getRecentItems(int $limit = 5): array
     {
-        $items = [];
-        $blogPosts = $this->blogService->getAllPosts($this->blogRootDir);
-        foreach ($blogPosts as $p) {
-            $items[] = [
-                'type' => 'blog',
-                'slug' => $p['post'],
-                'title' => $p['title'] ?? $p['post'],
-                'description' => $p['description'] ?? '',
-                'published' => $this->toDate($p['published'] ?? null),
-                'url' => '/blog.php?post=' . rawurlencode($p['post']),
+        $blogEntities = $this->blogService->getAllPostEntities($this->blogRootDir);
+        $projectEntities = $this->portfolioService->getAllProjectEntities($this->portfolioRootDir);
+
+        $aggregated = RecentItemsAggregator::aggregate($blogEntities, $projectEntities, $limit);
+
+        $out = [];
+        foreach ($aggregated as $row) {
+            $out[] = [
+                'type' => $row['type'] === 'project' ? 'portfolio' : $row['type'],
+                'slug' => $row['slug'],
+                'title' => $row['title'],
+                'description' => '',
+                'published' => $row['date'],
+                'url' => $row['type'] === 'blog'
+                    ? '/blog.php?post=' . rawurlencode($row['slug'])
+                    : '/portfolio.php?project=' . rawurlencode($row['slug']),
             ];
         }
-        $projects = $this->portfolioService->getAllProjects($this->portfolioRootDir);
-        foreach ($projects as $proj) {
-            $items[] = [
-                'type' => 'portfolio',
-                'slug' => $proj['slug'],
-                'title' => $proj['title'],
-                'description' => $proj['description'] ?? '',
-                'published' => $this->toDate($proj['published'] ?? null),
-                'url' => '/portfolio.php?project=' . rawurlencode($proj['slug']),
-            ];
-        }
-        usort($items, function ($a, $b) {
-            return $b['published'] <=> $a['published'];
-        });
-        return array_slice($items, 0, $limit);
+        return $out;
     }
 
     private function toDate(?string $value): DateTimeImmutable
