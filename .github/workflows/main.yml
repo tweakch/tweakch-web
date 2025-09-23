@@ -2,27 +2,17 @@
 
 name: CI
 
-# Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
       - name: Set up PHP 8.4
@@ -50,33 +40,72 @@ jobs:
         run: composer install --no-progress --no-dev --prefer-dist --optimize-autoloader --no-interaction
 
       - name: FTP Deploy
-      # You may pin to the exact commit or the version.
-        # uses: SamKirkland/FTP-Deploy-Action@2a4e9b1312ebeb73a1f72b9330c71831c1e4ce01
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
-          # ftp server
           server: sl1093.web.hostpoint.ch
-          # ftp username
           username: devops@tweak.ch
-          # ftp password
           password: ${{ secrets.DEVOPS_PASSWORD }}
-          # Server port to connect to (read your web hosts docs)
-          #port: # optional
-          # protocol to deploy with - ftp, ftps, or ftps-legacy
-          #protocol: # optional
-          # Folder to upload from, must end with trailing slash /
-          #local-dir: src/ # optional
-          # Path to upload to on the server. Must end with trailing slash /
-          #server-dir: # optional
-          # Path and name of the state file - this file is used to track which files have been deployed
-          #state-name: # optional
-          # Prints which modifications will be made with current config options, but doesnt actually make any changes
-          #dry-run: # optional
-          # Deletes ALL contents of server-dir, even items in excluded with exclude argument
-          #dangerous-clean-slate: # optional
-          # An array of glob patterns, these files will not be included in the publish/delete process
-          #exclude: # optional
-          # How verbose should the information be - warn, info, debug
-          #log-level: # optional
-          # strict or loose
-          #security: # optional
+
+  healthcheck:
+    name: Post-Deploy Healthcheck
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      BASE_URL: https://tweak.ch
+      # Adjust SLUG below if you rename or want to test a different post
+      TEST_BLOG_SLUG: a-dotnet-developers-php-api
+    steps:
+      - name: Wait for propagation
+        run: sleep 15
+
+      - name: Curl version
+        run: curl --version
+
+      - name: Smoke tests
+        run: |
+          set -euo pipefail
+          failures=0
+
+          test_endpoint () {
+            local url="$1"
+            local expect_code="${2:-200}"
+            local must_contain="${3:-}"
+            echo "Testing: $url"
+            code=$(curl -k -s -o /tmp/resp -w "%{http_code}" "$url" || true)
+            if [ "$code" != "$expect_code" ]; then
+              echo "::error::Unexpected status ($code) for $url (wanted $expect_code)"
+              failures=$((failures+1))
+            fi
+            if [ -n "$must_contain" ]; then
+              if ! grep -qi -- "$must_contain" /tmp/resp; then
+                echo "::error::Content check failed for $url (missing: $must_contain)"
+                failures=$((failures+1))
+              fi
+            fi
+          }
+
+          # Home page
+          test_endpoint "${BASE_URL}/" 200 "TWI"
+          # Blog index (legacy path still acceptable if exists); ignore if 404 not yet implemented
+          test_endpoint "${BASE_URL}/blog.php" 200 "Blog" || true
+          # Pretty blog post URL
+          test_endpoint "${BASE_URL}/blog/${TEST_BLOG_SLUG}" 200 "Modern PHP API"
+          # Fallback legacy blog query URL (should also work)
+          test_endpoint "${BASE_URL}/blog.php?post=${TEST_BLOG_SLUG}" 200 "Modern PHP API"
+
+          # Footer recent posts snippet presence (looks for Recent or German variant)
+          test_endpoint "${BASE_URL}/" 200 "Recent" || test_endpoint "${BASE_URL}/" 200 "Neueste"
+
+          if [ "$failures" -gt 0 ]; then
+            echo "::error::Smoke tests failed ($failures)."
+            exit 1
+          fi
+          echo "All smoke tests passed."
+
+      - name: Output page sizes (diagnostic)
+        if: success()
+        run: |
+          for p in "/" "/blog/${TEST_BLOG_SLUG}"; do
+            sz=$(curl -k -s -o /dev/null -w "%{size_download}" "${BASE_URL}${p}")
+            echo "Size ${p}: ${sz} bytes"
+          done
