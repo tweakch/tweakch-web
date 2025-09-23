@@ -6,6 +6,7 @@ role: Architect & Full‑Stack Developer
 tech: [PHP 8.2, Twig, CommonMark, Highlight.js, Docker, SCSS, Redis (planned)]
 tags: [refactor, php, twig, content-platform, modernization]
 published: 2025-09-10
+featured: true
 ---
 
 ## Overview

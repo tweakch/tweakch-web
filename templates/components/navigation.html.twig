@@ -23,16 +23,16 @@
         {% endfor %}
         
         {# Language Switcher #}
-        <li>
-            <a href="#" class="icon solid fa-globe">{{ lang.get('language.switch_to') }}</a>
-            <ul>
-                <li{{ lang.currentLanguage == 'en' ? ' class="active"' : '' }}>
-                    <a href="?lang=en">{{ lang.get('language.english') }}</a>
-                </li>
-                <li{{ lang.currentLanguage == 'de' ? ' class="active"' : '' }}>
-                    <a href="?lang=de">{{ lang.get('language.german') }}</a>
-                </li>
-            </ul>
-        </li>
+        {# <li>#}
+        {#     <a href="#" class="icon solid fa-globe">{{ lang.get('language.switch_to') }}</a>#}
+        {#     <ul>#}
+        {#         <li{{ lang.currentLanguage == 'en' ? ' class="active"' : '' }}>#}
+        {#             <a href="?lang=en">{{ lang.get('language.english') }}</a>#}
+        {#         </li>#}
+        {#         <li{{ lang.currentLanguage == 'de' ? ' class="active"' : '' }}>#}
+        {#             <a href="?lang=de">{{ lang.get('language.german') }}</a>#}
+        {#         </li>#}
+        {#     </ul>#}
+        {# </li>#}
     </ul>
 </nav>

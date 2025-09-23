@@ -1,33 +1,21 @@
 <section>
     <header>
-        <h2>{{ lang.get('footer.recent_posts.title') }}</h2>
+        <h2>{{ lang.get('footer.recent_posts.title')|default('Recent Updates') }}</h2>
     </header>
     <ul class="dates">
-        {% set recent_posts = lang.get('footer.recent_posts.posts') %}
-        {% if recent_posts is iterable %}
-            {% for post in recent_posts %}
+        {% if recent_posts is defined and recent_posts|length > 0 %}
+            {% for item in recent_posts %}
                 <li>
-                    <span class="date">{{ post.date }}</span>
-                    <h3><a href="#">{{ post.title }}</a></h3>
-                    <p>{{ post.excerpt }}</p>
+                    <span class="date">{{ item.published|date('M d') }}</span>
+                    <h3><a href="{{ item.url }}">{{ item.title }}</a></h3>
+                    <p>{{ item.description|slice(0,80) ~ (item.description|length > 80 ? '…' : '') }}</p>
                 </li>
             {% endfor %}
         {% else %}
-            {# Fallback content if no posts in translations #}
             <li>
-                <span class="date">Jan 27</span>
-                <h3><a href="#">Lorem dolor sit amet veroeros</a></h3>
-                <p>Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam.</p>
-            </li>
-            <li>
-                <span class="date">Jan 23</span>
-                <h3><a href="#">Ipsum sed blandit nisl consequat</a></h3>
-                <p>Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem.</p>
-            </li>
-            <li>
-                <span class="date">Jan 15</span>
-                <h3><a href="#">Magna tempus lorem feugiat</a></h3>
-                <p>Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat.</p>
+                <span class="date">—</span>
+                <h3><a href="#">No recent entries</a></h3>
+                <p>Add published content with a date to see it here.</p>
             </li>
         {% endif %}
     </ul>

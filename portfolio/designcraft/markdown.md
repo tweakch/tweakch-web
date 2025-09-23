@@ -6,6 +6,7 @@ role: Lead Engineer & Product Architect
 tech: [PHP 8.2, Twig, Symfony Components, Alpine.js, MySQL, Redis, Docker]
 tags: [saas, design, platform, performance]
 published: 2025-05-12
+featured: true
 ---
 
 ## Overview

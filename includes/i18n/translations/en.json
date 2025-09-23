@@ -1,15 +1,13 @@
 {
   "site": {
     "name": "TWIːK",
-    "description": "A responsive HTML5 + CSS3 site template designed by HTML5 UP and released for free under the Creative Commons license.",
+    "description": "A modern, responsive site concept – freely usable under a Creative Commons license and built to let ideas travel fast.",
     "author": "tweakch"
   },
   "nav": {
     "home": "Home",
     "blog": "Blog",
-    "left_sidebar": "Left Sidebar",
-    "right_sidebar": "Right Sidebar",
-    "no_sidebar": "No Sidebar"
+    "portfolio": "Portfolio"
   },
   "banner": {
     "title": "Alexander Klee",
@@ -27,15 +25,15 @@
     "intro": {
       "section1": {
         "title": "About Me",
-        "description": "I'm a passionate developer specializing in PHP and modern web technologies. Welcome to my portfolio!"
+          "description": "I love turning raw ideas into tangible digital experiences. Welcome to my portfolio!"
       },
       "section2": {
         "title": "Skills",
-        "description": "Experienced in PHP, JavaScript, HTML5, CSS3, and frameworks like Laravel and React. I build scalable and maintainable solutions."
+          "description": "I'm passionate about sharing knowledge with others to inspire and grow together."
       },
       "section3": {
         "title": "Contact",
-        "description": "Interested in collaboration or have a question? Contact me via email or through the contact form below."
+        "description": "Interested in a collaboration or have a question? Don't hesitate to contact me."
       },
       "get_started": "Get Started",
       "learn_more": "Learn More",
@@ -89,39 +87,10 @@
     }
   },
   "footer": {
-    "recent_posts": {
-      "title": "Recent Posts",
-      "posts": [
-        {
-          "date": "Jan 27",
-          "title": "Lorem dolor sit amet veroeros",
-          "excerpt": "Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam."
-        },
-        {
-          "date": "Jan 23",
-          "title": "Ipsum sed blandit nisl consequat",
-          "excerpt": "Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem."
-        },
-        {
-          "date": "Jan 15",
-          "title": "Magna tempus lorem feugiat",
-          "excerpt": "Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat."
-        },
-        {
-          "date": "Jan 12",
-          "title": "Dolore tempus ipsum feugiat nulla",
-          "excerpt": "Feugiat lorem dolor sed nullam tempus lorem ipsum dolor sit amet nullam consequat."
-        },
-        {
-          "date": "Jan 10",
-          "title": "Blandit tempus aliquam?",
-          "excerpt": "Feugiat sed tempus blandit tempus adipiscing nisl lorem ipsum dolor sit amet dolore."
-        }
-      ]
-    },
+    "recent_posts": { "title": "Recent Posts" },
     "about": {
       "title": "What's this all about?",
-      "description": "This is <strong>Dopetrope</strong> a free, fully responsive HTML5 site template by AJ for HTML5 UP. It's released for free under the Creative Commons Attribution license so feel free to use it for any personal or commercial project – just don't forget to credit us!",
+      "description": "This is <strong>Dopetrope</strong>, a free, fully responsive template. Use it for personal or commercial projects – a brief credit is appreciated and helps it live on.",
       "find_out_more": "Find out more"
     },
     "links": {

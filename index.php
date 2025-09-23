@@ -14,7 +14,7 @@ $introSections = [
         'desc' => $lang->get('sections.intro.section1.description')
     ],  
     [
-        'icon' => 'fa-code',
+        'icon' => 'fa-graduation-cap',
         'class' => 'middle',
         'title' => $lang->get('sections.intro.section2.title'),
         'desc' => $lang->get('sections.intro.section2.description')
@@ -27,57 +27,42 @@ $introSections = [
     ],
 ];
 
-// Prepare portfolio data
-$portfolio = [
-    [
-        'img' => 'pic02.png',
-        'title' => $lang->get('portfolio.item1.title'),
-        'desc' => $lang->get('portfolio.item1.description')
-    ],
-    [
-        'img' => 'pic03.png',
-        'title' => $lang->get('portfolio.item2.title'),
-        'desc' => $lang->get('portfolio.item2.description')
-    ],
-    [
-        'img' => 'pic04.png',
-        'title' => $lang->get('portfolio.item3.title'),
-        'desc' => $lang->get('portfolio.item3.description')
-    ],
-    [
-        'img' => 'pic05.jpg',
-        'title' => $lang->get('portfolio.item4.title'),
-        'desc' => $lang->get('portfolio.item4.description')
-    ],
-    [
-        'img' => 'pic06.jpg',
-        'title' => $lang->get('portfolio.item5.title'),
-        'desc' => $lang->get('portfolio.item5.description')
-    ],
-    [
-        'img' => 'pic07.jpg',
-        'title' => $lang->get('portfolio.item6.title'),
-        'desc' => $lang->get('portfolio.item6.description')
-    ],
-];
+use App\Services\BlogContentService;
+use App\Services\BlogService;
+use App\Services\PortfolioService;
 
-// Prepare blog posts data
-$blogPosts = [
-    [
-        'img' => 'pic08.jpg',
-        'title' => $lang->get('blog.post1.title'),
-        'time' => $lang->get('blog.post1.date'),
-        'comments' => 33,
-        'desc' => $lang->get('blog.post1.excerpt')
-    ],
-    [
-        'img' => 'pic09.jpg',
-        'title' => $lang->get('blog.post2.title'),
-        'time' => $lang->get('blog.post2.date'),
-        'comments' => 33,
-        'desc' => $lang->get('blog.post2.excerpt')
-    ],
-];
+$contentService = new BlogContentService();
+$blogService = new BlogService($contentService);
+$portfolioService = new PortfolioService($contentService);
+
+$blogDir = __DIR__ . '/blog';
+$portfolioDir = __DIR__ . '/portfolio';
+
+// Dynamic featured portfolio projects
+$portfolioItems = $portfolioService->getFeaturedProjects($portfolioDir);
+// Map to template shape expected
+$portfolio = array_map(function ($p) {
+    return [
+        'img' => $p['img'] ?? 'pic02.png', // fallback image
+        'title' => $p['title'],
+        'desc' => $p['description'],
+        'slug' => $p['slug'],
+    ];
+}, $portfolioItems);
+
+// Dynamic featured blog posts
+$blogPostsFeatured = $blogService->getFeaturedPosts($blogDir);
+$blogPosts = array_map(function ($p) {
+    return [
+        'img' => 'pic08.jpg', // placeholder image until metadata supports it
+        'title' => $p['title'],
+        'time' => $p['published'],
+        'link' => 'blog.php?post=' . urlencode($p['post']),
+        'comments' => 0,
+        'desc' => $p['description'],
+        'post' => $p['post'],
+    ];
+}, $blogPostsFeatured);
 
 // Render template
 echo $twig->render('pages/homepage.html.twig', [

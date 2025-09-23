@@ -5,6 +5,10 @@ namespace App\Services;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use App\i18n\Language;
+use App\Services\BlogContentService;
+use App\Services\BlogService;
+use App\Services\PortfolioService;
+use App\Services\PostService;
 
 /**
  * Twig template rendering service
@@ -19,12 +23,16 @@ class TemplateService
         // Create Twig loader pointing to templates directory
         $loader = new FilesystemLoader(__DIR__ . '/../../templates');
         
-        // Create Twig environment
-        $this->twig = new Environment($loader, [
-            'cache' => __DIR__ . '/../../var/cache/twig',
-            'debug' => true, // Set to false in production
-            'auto_reload' => true, // Set to false in production
-        ]);
+        // Determine if twig cache should be disabled (e.g. local dev)
+        $disableCache = getenv('DISABLE_TWIG_CACHE') === '1';
+        $twigOptions = [
+            'debug' => true,
+            'auto_reload' => true,
+        ];
+        if (!$disableCache) {
+            $twigOptions['cache'] = __DIR__ . '/../../var/cache/twig';
+        }
+        $this->twig = new Environment($loader, $twigOptions);
 
         // Get language instance
         $this->language = Language::getInstance();
@@ -59,6 +67,23 @@ class TemplateService
         
         // Add navigation structure
         $this->twig->addGlobal('navigation_items', $this->getNavigationStructure());
+
+        // Recent posts aggregate (blog + portfolio)
+        try {
+            $content = new BlogContentService();
+            $blogService = new BlogService($content);
+            $portfolioService = new PortfolioService($content);
+            $postService = new PostService(
+                $blogService,
+                $portfolioService,
+                __DIR__ . '/../../blog',
+                __DIR__ . '/../../portfolio'
+            );
+            $recent = $postService->getRecentItems(5);
+        } catch (\Throwable $e) {
+            $recent = [];
+        }
+        $this->twig->addGlobal('recent_posts', $recent);
     }
 
     /**

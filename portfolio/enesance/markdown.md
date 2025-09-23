@@ -6,6 +6,7 @@ role: Full‑Stack Developer
 tech: [PHP 8.2, Twig, Tailwind (utility subset), HTMX, Alpine.js, Vite, Netlify]
 tags: [website, hydration, accessibility, performance]
 published: 2025-03-02
+featured: true
 ---
 
 ## Overview

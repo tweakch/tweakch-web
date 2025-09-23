@@ -1,15 +1,13 @@
 {
   "site": {
     "name": "TWIːK",
-    "description": "Eine responsive HTML5 + CSS3 Website-Vorlage, entworfen von HTML5 UP und kostenlos unter der Creative Commons Lizenz veröffentlicht.",
+    "description": "Eine moderne, responsive Website-Vorlage – frei nutzbar unter Creative‑Commons Lizenz und geschaffen, um Ideen sichtbar zu machen.",
     "author": "tweakch"
   },
   "nav": {
     "home": "Startseite",
     "blog": "Blog",
-    "left_sidebar": "Linke Seitenleiste",
-    "right_sidebar": "Rechte Seitenleiste",
-    "no_sidebar": "Keine Seitenleiste"
+    "portfolio": "Portfolio "
   },
   "banner": {
     "title": "Alexander Klee",
@@ -27,11 +25,11 @@
     "intro": {
       "section1": {
         "title": "Über mich",
-        "description": "Ich bin ein leidenschaftlicher Entwickler, spezialisiert auf PHP und moderne Webtechnologien. Willkommen in meinem Portfolio!"
+          "description": "Ich bin ein leidenschaftlicher Entwickler, der gerne Ideen in erlebbare digitale Erlebnisse verwandelt. Willkommen in meinem Portfolio!"
       },
       "section2": {
         "title": "Fähigkeiten",
-        "description": "Erfahren in PHP, JavaScript, HTML5, CSS3 und Frameworks wie Laravel und React. Ich erstelle skalierbare und wartbare Lösungen."
+          "description": "Ich gestalte strukturierte, klare und nachhaltige Lösungen – mit Fokus auf Qualität, Verständlichkeit und Weiterentwicklung."
       },
       "section3": {
         "title": "Kontakt",
@@ -89,39 +87,10 @@
     }
   },
   "footer": {
-    "recent_posts": {
-      "title": "Neueste Beiträge",
-      "posts": [
-        {
-          "date": "27. Jan",
-          "title": "Lorem dolor sit amet veroeros",
-          "excerpt": "Ipsum dolor sit amet veroeros consequat blandit ipsum phasellus lorem consequat etiam."
-        },
-        {
-          "date": "23. Jan",
-          "title": "Ipsum sed blandit nisl consequat",
-          "excerpt": "Blandit phasellus lorem ipsum dolor tempor sapien tortor hendrerit adipiscing feugiat lorem."
-        },
-        {
-          "date": "15. Jan",
-          "title": "Magna tempus lorem feugiat",
-          "excerpt": "Dolore consequat sed phasellus lorem sed etiam nullam dolor etiam sed amet sit consequat."
-        },
-        {
-          "date": "12. Jan",
-          "title": "Dolore tempus ipsum feugiat nulla",
-          "excerpt": "Feugiat lorem dolor sed nullam tempus lorem ipsum dolor sit amet nullam consequat."
-        },
-        {
-          "date": "10. Jan",
-          "title": "Blandit tempus aliquam?",
-          "excerpt": "Feugiat sed tempus blandit tempus adipiscing nisl lorem ipsum dolor sit amet dolore."
-        }
-      ]
-    },
+    "recent_posts": { "title": "Neueste Beiträge" },
     "about": {
       "title": "Worum geht es hier?",
-      "description": "Dies ist <strong>Dopetrope</strong>, eine kostenlose, vollständig responsive HTML5-Website-Vorlage von AJ für HTML5 UP. Sie wird kostenlos unter der Creative Commons Attribution-Lizenz veröffentlicht, also verwenden Sie sie gerne für jedes persönliche oder kommerzielle Projekt – vergessen Sie nur nicht, uns zu erwähnen!",
+      "description": "Dies ist <strong>Dopetrope</strong>, eine frei verfügbare, vollständig responsive Vorlage. Nutze sie gerne für persönliche oder kommerzielle Projekte – ein kurzer Hinweis auf die ursprüngliche Quelle genügt und freut uns!",
       "find_out_more": "Mehr erfahren"
     },
     "links": {
