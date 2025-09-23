@@ -11,7 +11,7 @@
     <div class="row">
       {% if projects %}
         {% for project in projects %}
-          <div class="col-4 col-12-small" style="margin-bottom:1.5rem;">
+          <div class="col-4 col-6-medium col-12-small" style="margin-bottom:1.5rem;">
             <section class="box">
               <a href="portfolio.php?project={{ project.slug }}" class="image featured"><img src="images/pic0{{ loop.index % 10 + 1 }}.jpg" alt="{{ project.title }}"></a>
               <header><h3><a href="portfolio.php?project={{ project.slug }}">{{ project.title }}</a></h3></header>
@@ -46,6 +46,5 @@
 .tech-chips{margin:.5rem 0 .75rem;display:flex;flex-wrap:wrap;gap:.4rem}
 .tech-chip{background:#f0f2f5;padding:.25rem .55rem;border-radius:2px;font-size:.65rem;line-height:1;font-weight:500;color:#333}
 .tech-chip.more{background:#e2e8f0;color:#555}
-@media (max-width:736px){.col-4{width:100%!important}}
 </style>
 {% endblock %}
