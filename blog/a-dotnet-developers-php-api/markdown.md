@@ -13,11 +13,13 @@ If you are used to ASP.NET (controllers, middleware pipelines, dependency inject
 
 In .NET you trust abstractions (HttpContext, IActionResult). PHP’s FIG group codified similar interoperability via PSRs. Start with:
 
-- PSR‑4 autoloading (class → file resolution) – replaces manual include/require.
-- PSR‑7 request/response objects – like HttpRequest/HttpResponse abstractions.
-- PSR‑15 middleware – analogous to ASP.NET middleware pipeline.
-- PSR‑17 factories – standardized object creation for PSR‑7 types.
-- PSR‑11 containers – DI lookup (like IServiceProvider).
+- [PSR‑4 autoloading](https://www.php-fig.org/psr/psr-4/) (class → file resolution) – replaces manual include/require.
+- [PSR‑7 request/response objects](https://www.php-fig.org/psr/psr-7/) – like HttpRequest/HttpResponse abstractions.
+- [PSR‑15 middleware](https://www.php-fig.org/psr/psr-15/) – analogous to ASP.NET middleware pipeline.
+- [PSR‑17 factories](https://www.php-fig.org/psr/psr-17/) – standardized object creation for PSR‑7 types.
+- [PSR‑11 containers](https://www.php-fig.org/psr/psr-11/) – DI lookup (like IServiceProvider).
+- [PSR‑3 logging](https://www.php-fig.org/psr/psr-3/) – standardized logger interface.
+- [PSR‑16 simple cache](https://www.php-fig.org/psr/psr-16/) – basic caching interoperability.
 Adopt incrementally: begin with PSR‑4 (already via Composer), then PSR‑7/15 when you introduce a router + middleware.
 
 ## 2. Layered Architecture – Keep HTTP Out of Your Core
