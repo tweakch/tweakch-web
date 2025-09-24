@@ -1,7 +1,4 @@
-# Use php-fpm php84
-<IfModule mod_fcgid.c>
-    FcgidWrapper /usr/local/bin/php84-cgi .php
-</IfModule>
+Use php-fpm php84
 
 # PHP Configuration
 <IfModule mod_php.c>
