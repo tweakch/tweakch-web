@@ -1,0 +1,64 @@
+Use php-fpm php84
+
+# PHP Configuration
+<IfModule mod_php.c>
+    php_value upload_max_filesize 32M
+    php_value post_max_size 32M
+    php_value memory_limit 256M
+    php_value max_execution_time 60
+</IfModule>
+
+# URL Rewrites to fix the failing workflow smoketests
+RewriteEngine On
+
+# Blog post clean URLs: /blog/post-slug -> /blog.php?post=post-slug
+RewriteRule ^blog/([a-z0-9-]+)/?$ blog.php?post=$1 [QSA,L]
+
+# Portfolio clean URLs (if needed in future): /portfolio/slug -> /portfolio.php?post=slug
+# RewriteRule ^portfolio/([a-z0-9-]+)/?$ portfolio.php?post=$1 [QSA,L]
+
+# Security: Block access to sensitive files
+<FilesMatch "\.(md|yml|yaml|json|lock|txt|log|env)$">
+    Require all denied
+</FilesMatch>
+
+# Block access to composer files
+<FilesMatch "^(composer\.(json|lock|phar)|package(-lock)?\.json)$">
+    Require all denied
+</FilesMatch>
+
+# Block access to configuration and include directories
+RedirectMatch 403 ^/includes/.*$
+RedirectMatch 403 ^/src/.*$
+RedirectMatch 403 ^/templates/.*$
+RedirectMatch 403 ^/tests/.*$
+RedirectMatch 403 ^/var/.*$
+
+# Cache static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+</IfModule>
+
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+#@__HCP_END__@#
+# Anything after the comment above is left alone
