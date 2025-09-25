@@ -4,7 +4,7 @@ These lightweight standards guide ongoing PHP changes.
 
 ## Target Runtime
 
-- PHP 8.2+
+- PHP 8.4+
 - Nginx (reverse proxy) -> PHP-FPM upstream
 - UTF-8 everywhere
 
