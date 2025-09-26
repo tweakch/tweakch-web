@@ -1,74 +1,170 @@
 <?php
+/**
+ * Modern Router for the Site
+ * Handles all incoming requests and routes them to appropriate handlers
+ */
+
+// Start output buffering and session
+ob_start();
+
+// Include configuration
 include __DIR__ . '/includes/config.php';
 
-// Page data
-$pageTitle = $lang->get('nav.home') . ' | ' . $SITE_NAME;
-$bodyClass = 'homepage is-preload';
+/**
+ * Simple yet modern router class
+ */
+class Router
+{
+    private $routes = [];
+    private $basePath = '';
 
-// Prepare intro sections data
-$introSections = [
-    [
-        'icon' => 'fa-user',
-        'class' => 'first',
-        'title' => $lang->get('sections.intro.section1.title'),
-        'desc' => $lang->get('sections.intro.section1.description')
-    ],  
-    [
-        'icon' => 'fa-graduation-cap',
-        'class' => 'middle',
-        'title' => $lang->get('sections.intro.section2.title'),
-        'desc' => $lang->get('sections.intro.section2.description')
-    ],
-    [
-        'icon' => 'fa-envelope',
-        'class' => 'last',
-        'title' => $lang->get('sections.intro.section3.title'),
-        'desc' => $lang->get('sections.intro.section3.description')
-    ],
-];
+    public function __construct($basePath = '')
+    {
+        $this->basePath = rtrim($basePath, '/');
+    }
 
-use App\Services\BlogContentService;
-use App\Services\BlogService;
-use App\Services\PortfolioService;
+    /**
+     * Add a route
+     */
+    public function add($pattern, $handler)
+    {
+        $this->routes[$pattern] = $handler;
+    }
 
-$contentService = new BlogContentService();
-$blogService = new BlogService($contentService);
-$portfolioService = new PortfolioService($contentService);
+    /**
+     * Get the current request URI
+     */
+    private function getCurrentUri()
+    {
+        $uri = $_SERVER['REQUEST_URI'] ?? '/';
+        
+        // Remove query string
+        if (($pos = strpos($uri, '?')) !== false) {
+            $uri = substr($uri, 0, $pos);
+        }
+        
+        // Remove base path
+        if ($this->basePath && strpos($uri, $this->basePath) === 0) {
+            $uri = substr($uri, strlen($this->basePath));
+        }
+        
+        return rtrim($uri, '/') ?: '/';
+    }
 
-$blogDir = __DIR__ . '/blog';
-$portfolioDir = __DIR__ . '/portfolio';
+    /**
+     * Route the request
+     */
+    public function route()
+    {
+        $uri = $this->getCurrentUri();
+        
+        // Check for exact matches first
+        if (isset($this->routes[$uri])) {
+            return $this->executeHandler($this->routes[$uri], []);
+        }
+        
+        // Check for pattern matches
+        foreach ($this->routes as $pattern => $handler) {
+            if ($this->matchPattern($pattern, $uri, $matches)) {
+                return $this->executeHandler($handler, $matches);
+            }
+        }
+        
+        // No route found - 404
+        $this->handle404();
+    }
 
-// Dynamic featured portfolio projects
-$portfolioItems = $portfolioService->getFeaturedProjects($portfolioDir);
-// Map to template shape expected
-$portfolio = array_map(function ($p) {
-    return [
-        'img' => $p['img'] ?? 'pic02.png', // fallback image
-        'title' => $p['title'],
-        'desc' => $p['description'],
-        'slug' => $p['slug'],
-    ];
-}, $portfolioItems);
+    /**
+     * Match URI against pattern
+     */
+    private function matchPattern($pattern, $uri, &$matches)
+    {
+        // Convert pattern to regex
+        $regex = str_replace(['/', '{id}', '{slug}', '{*}'], ['\/', '([^\/]+)', '([^\/]+)', '(.*)'], $pattern);
+        $regex = '/^' . $regex . '$/';
+        
+        return preg_match($regex, $uri, $matches);
+    }
 
-// Dynamic featured blog posts
-$blogPostsFeatured = $blogService->getFeaturedPosts($blogDir);
-$blogPosts = array_map(function ($p) {
-    return [
-        'img' => 'pic08.jpg', // placeholder image until metadata supports it
-        'title' => $p['title'],
-        'time' => $p['published'],
-        'link' => 'blog.php?post=' . urlencode($p['post']),
-        'comments' => 0,
-        'desc' => $p['description'],
-        'post' => $p['post'],
-    ];
-}, $blogPostsFeatured);
+    /**
+     * Execute route handler
+     */
+    private function executeHandler($handler, $matches = [])
+    {
+        if (is_string($handler)) {
+            // File path
+            if (file_exists(__DIR__ . '/' . $handler)) {
+                // Pass route parameters as global variables
+                if (!empty($matches)) {
+                    $GLOBALS['route_params'] = array_slice($matches, 1);
+                }
+                include __DIR__ . '/' . $handler;
+            } else {
+                $this->handle404();
+            }
+        } elseif (is_callable($handler)) {
+            // Callable function
+            call_user_func_array($handler, array_slice($matches, 1));
+        }
+    }
 
-// Render template
-echo $twig->render('pages/homepage.html.twig', [
-    'page_title' => $pageTitle,
-    'body_class' => $bodyClass,
-    'intro_sections' => $introSections,
-    'portfolio' => $portfolio,
-    'blog_posts' => $blogPosts,
-]);
+    /**
+     * Handle 404 errors
+     */
+    private function handle404()
+    {
+        http_response_code(404);
+        
+        // Check if we have a custom 404 page
+        if (file_exists(__DIR__ . '/404.php')) {
+            include __DIR__ . '/404.php';
+        } else {
+            // Default 404 response
+            include __DIR__ . '/includes/config.php';
+            $pageTitle = '404 - Page Not Found | ' . $SITE_NAME;
+            $bodyClass = 'error-page';
+            
+            if (isset($twig)) {
+                // Try to render with template if available
+                try {
+                    echo $twig->render('pages/404.html.twig', [
+                        'page_title' => $pageTitle,
+                        'body_class' => $bodyClass,
+                    ]);
+                } catch (Exception $e) {
+                    // Fallback to simple HTML
+                    echo "<!DOCTYPE html><html><head><title>404 - Page Not Found</title></head><body><h1>404 - Page Not Found</h1><p>The requested page could not be found.</p></body></html>";
+                }
+            } else {
+                echo "<!DOCTYPE html><html><head><title>404 - Page Not Found</title></head><body><h1>404 - Page Not Found</h1><p>The requested page could not be found.</p></body></html>";
+            }
+        }
+    }
+}
+
+// Initialize router
+$router = new Router();
+
+// Define routes
+$router->add('/', 'home.php');                                    // Homepage
+$router->add('/home', 'home.php');                               // Alternative home
+$router->add('/blog', 'blog.php');                              // Blog listing
+$router->add('/blog/{slug}', 'blog.php');                       // Individual blog post
+$router->add('/portfolio', 'portfolio.php');                    // Portfolio listing  
+$router->add('/portfolio/{slug}', 'portfolio.php');             // Individual portfolio item
+$router->add('/left-sidebar', 'left-sidebar.php');              // Left sidebar layout
+$router->add('/right-sidebar', 'right-sidebar.php');            // Right sidebar layout
+$router->add('/no-sidebar', 'no-sidebar.php');                  // No sidebar layout
+
+// API routes (if needed in the future)
+$router->add('/api/{*}', function($path) {
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'API endpoint not implemented', 'path' => $path]);
+});
+
+// Execute routing
+$router->route();
+
+// End output buffering
+ob_end_flush();
+?>
