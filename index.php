@@ -6,9 +6,9 @@
 
 // Start output buffering and session
 ob_start();
-
-// Include configuration
-include __DIR__ . '/includes/config.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 /**
  * Simple yet modern router class
@@ -94,11 +94,22 @@ class Router
         if (is_string($handler)) {
             // File path
             if (file_exists(__DIR__ . '/' . $handler)) {
+                // Store original script name
+                $originalScriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+                
+                // Set script name to the target handler for nav_active to work
+                $_SERVER['SCRIPT_NAME'] = '/' . $handler;
+                
                 // Pass route parameters as global variables
                 if (!empty($matches)) {
                     $GLOBALS['route_params'] = array_slice($matches, 1);
                 }
+                
+                // Include the target handler
                 include __DIR__ . '/' . $handler;
+                
+                // Restore original script name
+                $_SERVER['SCRIPT_NAME'] = $originalScriptName;
             } else {
                 $this->handle404();
             }
@@ -119,25 +130,8 @@ class Router
         if (file_exists(__DIR__ . '/404.php')) {
             include __DIR__ . '/404.php';
         } else {
-            // Default 404 response
-            include __DIR__ . '/includes/config.php';
-            $pageTitle = '404 - Page Not Found | ' . $SITE_NAME;
-            $bodyClass = 'error-page';
-            
-            if (isset($twig)) {
-                // Try to render with template if available
-                try {
-                    echo $twig->render('pages/404.html.twig', [
-                        'page_title' => $pageTitle,
-                        'body_class' => $bodyClass,
-                    ]);
-                } catch (Exception $e) {
-                    // Fallback to simple HTML
-                    echo "<!DOCTYPE html><html><head><title>404 - Page Not Found</title></head><body><h1>404 - Page Not Found</h1><p>The requested page could not be found.</p></body></html>";
-                }
-            } else {
-                echo "<!DOCTYPE html><html><head><title>404 - Page Not Found</title></head><body><h1>404 - Page Not Found</h1><p>The requested page could not be found.</p></body></html>";
-            }
+            // Default 404 response - simple HTML without including config
+            echo "<!DOCTYPE html><html><head><title>404 - Page Not Found</title></head><body><h1>404 - Page Not Found</h1><p>The requested page could not be found.</p></body></html>";
         }
     }
 }
