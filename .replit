@@ -21,10 +21,11 @@ args = "PHP Server"
 [[workflows.workflow]]
 name = "PHP Server"
 author = "agent"
+mode = "parallel"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "php -S 0.0.0.0:5000 -t ."
+args = "php -S 0.0.0.0:5000 -t . index.php"
 waitForPort = 5000
 
 [workflows.workflow.metadata]
