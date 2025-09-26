@@ -91,8 +91,8 @@ jobs:
 
           test_endpoint "${BASE_URL}/" 200 "TWI"
           test_endpoint "${BASE_URL}/blog.php" 200 "Blog" || true
-          test_endpoint "${BASE_URL}/blog/${TEST_BLOG_SLUG}" 200 "Modern PHP API"
-          test_endpoint "${BASE_URL}/blog.php?post=${TEST_BLOG_SLUG}" 200 "Modern PHP API"
+          test_endpoint "${BASE_URL}/blog/${TEST_BLOG_SLUG}" 200 "Building a PHP API as a .NET Developer"
+          test_endpoint "${BASE_URL}/blog.php?post=${TEST_BLOG_SLUG}" 200 "Building a PHP API as a .NET Developer"
 
           test_endpoint "${BASE_URL}/" 200 "Recent" || test_endpoint "${BASE_URL}/" 200 "Neueste"
 
