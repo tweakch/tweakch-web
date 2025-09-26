@@ -1,0 +1,111 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+          tools: composer
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --no-check-publish
+
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies (with dev)
+        run: composer install --no-progress --prefer-dist --optimize-autoloader --no-interaction
+
+      - name: Run PHPStan (non-blocking)
+        continue-on-error: true
+        run: vendor/bin/phpstan analyse --no-progress
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit --no-coverage
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: sl1093.web.hostpoint.ch
+          username: devops@tweak.ch
+          password: ${{ secrets.DEVOPS_PASSWORD }}
+
+  healthcheck:
+    name: Post-Deploy Healthcheck
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      BASE_URL: https://tweak.ch
+      TEST_BLOG_SLUG: a-dotnet-developers-php-api
+    steps:
+      - name: Wait for propagation
+        run: sleep 15
+
+      - name: Curl version
+        run: curl --version
+
+      - name: Smoke tests
+        run: |
+          set -euo pipefail
+          failures=0
+
+          test_endpoint () {
+            local url="$1"
+            local expect_code="${2:-200}"
+            local must_contain="${3:-}"
+            echo "Testing: $url"
+            code=$(curl -k -s -o /tmp/resp -w "%{http_code}" "$url" || true)
+            if [ "$code" != "$expect_code" ]; then
+              echo "::error::Unexpected status ($code) for $url (wanted $expect_code)"
+              failures=$((failures+1))
+            fi
+            if [ -n "$must_contain" ]; then
+              if ! grep -qi -- "$must_contain" /tmp/resp; then
+                echo "::error::Content check failed for $url (missing: $must_contain)"
+                failures=$((failures+1))
+              fi
+            fi
+          }
+
+          test_endpoint "${BASE_URL}/" 200 "TWI"
+          test_endpoint "${BASE_URL}/blog.php" 200 "Blog" || true
+          test_endpoint "${BASE_URL}/blog/${TEST_BLOG_SLUG}" 200 "Modern PHP API"
+          test_endpoint "${BASE_URL}/blog.php?post=${TEST_BLOG_SLUG}" 200 "Modern PHP API"
+
+          test_endpoint "${BASE_URL}/" 200 "Recent" || test_endpoint "${BASE_URL}/" 200 "Neueste"
+
+          if [ "$failures" -gt 0 ]; then
+            echo "::error::Smoke tests failed ($failures)."
+            exit 1
+          fi
+          echo "All smoke tests passed."
+
+      - name: Output page sizes (diagnostic)
+        if: success()
+        run: |
+          for p in "/" "/blog/${TEST_BLOG_SLUG}"; do
+            sz=$(curl -k -s -o /dev/null -w "%{size_download}" "${BASE_URL}${p}")
+            echo "Size ${p}: ${sz} bytes"
+          done
