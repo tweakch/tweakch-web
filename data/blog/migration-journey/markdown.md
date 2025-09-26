@@ -1,5 +1,5 @@
 ---
-title: "From Static HTML to Modern PHP: A Complete Website Transformation Journey"
+title: "Tweakend Project: From Static HTML to Modern PHP"
 post: "migration-journey"
 description: "A detailed chronicle of transforming a static HTML5UP template into a modern PHP application using Twig, Docker, and internationalization - from legacy to cutting-edge in one comprehensive migration."
 author: "Alexander Klee"

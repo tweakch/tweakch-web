@@ -35,8 +35,8 @@ class PostService
                 'description' => '',
                 'published' => $row['date'],
                 'url' => $row['type'] === 'blog'
-                    ? '/blog.php?post=' . rawurlencode($row['slug'])
-                    : '/portfolio.php?project=' . rawurlencode($row['slug']),
+                    ? '/blog?post=' . rawurlencode($row['slug'])
+                    : '/portfolio?project=' . rawurlencode($row['slug']),
             ];
         }
         return $out;

@@ -76,8 +76,8 @@ class TemplateService
             $postService = new PostService(
                 $blogService,
                 $portfolioService,
-                __DIR__ . '/../../blog',
-                __DIR__ . '/../../portfolio'
+                __DIR__ . '/../../data/blog',
+                __DIR__ . '/../../data/portfolio'
             );
             $recent = $postService->getRecentItems(5);
         } catch (\Throwable $e) {
@@ -94,17 +94,17 @@ class TemplateService
         return [
             [
                 'label' => 'nav.home',
-                'url' => 'index.php',
+                'url' => 'home',
                 'route' => 'index.php'
             ],
             [
                 'label' => 'nav.portfolio',
-                'url' => 'portfolio.php',
+                'url' => 'portfolio',
                 'route' => 'portfolio.php'
             ],
             [
                 'label' => 'nav.blog',
-                'url' => 'blog.php',
+                'url' => 'blog',
                 'route' => 'blog.php'
             ],
             [

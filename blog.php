@@ -1,5 +1,4 @@
 <?php
-// blog.php - Dynamic blog engine
 include __DIR__ . '/includes/config.php';
 
 use App\Services\BlogContentService;
@@ -12,7 +11,7 @@ $post = $_GET['post'] ?? '';
 // If no post provided, show blog index page
 if (empty($post)) {
     // Show blog index with all posts
-    $blogDir = __DIR__ . '/blog';
+    $blogDir = __DIR__ . '/data/blog';
     $blogPosts = [];
     
     if (is_dir($blogDir)) {
@@ -42,7 +41,7 @@ if (!preg_match('/^[a-z0-9-]+$/', $post)) {
 }
 
 // Construct file path
-$blogDir = __DIR__ . '/blog/' . $post;
+$blogDir = __DIR__ . '/data/blog/' . $post;
 $markdownFile = $blogDir . '/markdown.md';
 
 // Check if blog post exists
@@ -79,12 +78,12 @@ $currentTags = $metadata['tags'] ?? [];
 
 if (!empty($currentTags)) {
     $allBlogPosts = [];
-    $directories = array_filter(scandir(__DIR__ . '/blog'), function($item) use ($post) {
-        return is_dir(__DIR__ . '/blog/' . $item) && $item !== '.' && $item !== '..' && $item !== $post;
+    $directories = array_filter(scandir(__DIR__ . '/data/blog'), function($item) use ($post) {
+        return is_dir(__DIR__ . '/data/blog/' . $item) && $item !== '.' && $item !== '..' && $item !== $post;
     });
     
     foreach ($directories as $directory) {
-        $relatedMarkdownFile = __DIR__ . '/blog/' . $directory . '/markdown.md';
+        $relatedMarkdownFile = __DIR__ . '/data/blog/' . $directory . '/markdown.md';
         if (file_exists($relatedMarkdownFile)) {
             $relParsed = $service->parseFile($relatedMarkdownFile);
             $relMeta = $relParsed['metadata'];

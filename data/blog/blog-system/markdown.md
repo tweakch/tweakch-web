@@ -1,5 +1,5 @@
 ---
-title: "Building your own Blog Engine"
+title: "Tweakend Project: Building a simple Blog Engine"
 subtitle: "Building a Flexible Blog Engine with PHP, Twig, and Markdown"
 post: "blog-system"
 description: "Designing and implementing a lightweight, markdown-powered blog system that transforms static files into dynamic content while maintaining clean architecture and optimal performance."
