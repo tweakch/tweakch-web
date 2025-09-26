@@ -58,6 +58,19 @@ class Router
     {
         $uri = $this->getCurrentUri();
         
+        // Handle static assets first (CSS, JS, images, fonts, etc.)
+        if ($this->isStaticAsset($uri)) {
+            $filePath = __DIR__ . $uri;
+            if (file_exists($filePath) && is_file($filePath)) {
+                $this->serveStaticFile($filePath);
+                return;
+            } else {
+                // Static file not found
+                http_response_code(404);
+                return;
+            }
+        }
+        
         // Check for exact matches first
         if (isset($this->routes[$uri])) {
             return $this->executeHandler($this->routes[$uri], []);
@@ -72,6 +85,63 @@ class Router
         
         // No route found - 404
         $this->handle404();
+    }
+
+    /**
+     * Check if URI is for a static asset
+     */
+    private function isStaticAsset($uri)
+    {
+        $staticExtensions = [
+            'css', 'js', 'jpg', 'jpeg', 'png', 'gif', 'svg', 'ico', 'webp',
+            'woff', 'woff2', 'ttf', 'eot', 'otf', 'pdf', 'txt', 'json', 'xml'
+        ];
+        
+        $pathInfo = pathinfo($uri);
+        $extension = strtolower($pathInfo['extension'] ?? '');
+        
+        return in_array($extension, $staticExtensions);
+    }
+
+    /**
+     * Serve static files with appropriate headers
+     */
+    private function serveStaticFile($filePath)
+    {
+        $mimeTypes = [
+            'css' => 'text/css',
+            'js' => 'application/javascript',
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+            'svg' => 'image/svg+xml',
+            'ico' => 'image/x-icon',
+            'webp' => 'image/webp',
+            'woff' => 'font/woff',
+            'woff2' => 'font/woff2',
+            'ttf' => 'font/ttf',
+            'eot' => 'application/vnd.ms-fontobject',
+            'otf' => 'font/otf',
+            'pdf' => 'application/pdf',
+            'txt' => 'text/plain',
+            'json' => 'application/json',
+            'xml' => 'application/xml'
+        ];
+        
+        $pathInfo = pathinfo($filePath);
+        $extension = strtolower($pathInfo['extension'] ?? '');
+        $mimeType = $mimeTypes[$extension] ?? 'application/octet-stream';
+        
+        header('Content-Type: ' . $mimeType);
+        header('Content-Length: ' . filesize($filePath));
+        
+        // Add cache headers for better performance
+        $lastModified = filemtime($filePath);
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s T', $lastModified));
+        header('Cache-Control: public, max-age=3600'); // Cache for 1 hour
+        
+        readfile($filePath);
     }
 
     /**
