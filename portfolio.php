@@ -1,5 +1,4 @@
 <?php
-// portfolio.php - Dynamic portfolio (projects) engine
 include __DIR__ . '/includes/config.php';
 
 use App\Services\BlogContentService; // Reuse for markdown/front matter parsing

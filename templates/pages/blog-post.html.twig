@@ -60,7 +60,7 @@
 
         <div class="blog-navigation">
             <div class="row">
-                <div class="col-6 col-12-small"><a href="blog.php" class="button">&larr; Back to Blog</a></div>
+                <div class="col-6 col-12-small"><a href="blog" class="button">&larr; Back to Blog</a></div>
                 <div class="col-6 col-12-small"><a href="#top" class="button alt">Back to Top &uarr;</a></div>
             </div>
         </div>
@@ -72,9 +72,9 @@
                     {% for relatedPost in relatedPosts %}
                         <div class="col-4 col-12-small" style="margin-bottom:1rem;">
                             <section class="box">
-                                <a href="blog.php?post={{ relatedPost.post }}" class="image featured"><img src="images/pic0{{ loop.index % 10 + 1 }}.jpg" alt="{{ relatedPost.title }}" /></a>
-                                <header><h4><a href="blog.php?post={{ relatedPost.post }}">{{ relatedPost.title }}</a></h4><p class="post-meta">{% if relatedPost.published %}<time datetime="{{ relatedPost.published }}">{{ relatedPost.published }}</time>{% endif %}</p></header>
-                                <footer><ul class="actions"><li><a class="button alt" href="blog.php?post={{ relatedPost.post }}">Read More</a></li></ul></footer>
+                                <a href="blog?post={{ relatedPost.post }}" class="image featured"><img src="images/pic0{{ loop.index % 10 + 1 }}.jpg" alt="{{ relatedPost.title }}" /></a>
+                                <header><h4><a href="blog?post={{ relatedPost.post }}">{{ relatedPost.title }}</a></h4><p class="post-meta">{% if relatedPost.published %}<time datetime="{{ relatedPost.published }}">{{ relatedPost.published }}</time>{% endif %}</p></header>
+                                <footer><ul class="actions"><li><a class="button alt" href="blog?post={{ relatedPost.post }}">Read More</a></li></ul></footer>
                             </section>
                         </div>
                     {% endfor %}

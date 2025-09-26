@@ -26,11 +26,11 @@
                         
                         {% for post in blog_posts %}
                             <section class="box">
-                                <a href="blog.php?post={{ post.post }}" class="image featured">
+                                <a href="blog?post={{ post.post }}" class="image featured">
                                     <img src="images/pic0{{ loop.index % 10 + 1 }}.jpg" alt="{{ post.title }}" />
                                 </a>
                                 <header>
-                                    <h3><a href="blog.php?post={{ post.post }}">{{ post.title }}</a></h3>
+                                    <h3><a href="blog?post={{ post.post }}">{{ post.title }}</a></h3>
                                     <p class="post-meta">
                                         {% if post.published %}
                                             <time datetime="{{ post.published }}">{{ post.published }}</time>
@@ -55,7 +55,7 @@
                                 
                                 <footer>
                                     <ul class="actions">
-                                        <li><a href="blog.php?post={{ post.post }}" class="button alt">Read More</a></li>
+                                        <li><a href="blog?post={{ post.post }}" class="button alt">Read More</a></li>
                                     </ul>
                                 </footer>
                             </section>
@@ -93,7 +93,7 @@
                     {% if blog_posts %}
                         <ul class="divided">
                             {% for post in blog_posts|slice(0, 5) %}
-                                <li><a href="blog.php?post={{ post.post }}">{{ post.title }}</a></li>
+                                <li><a href="blog?post={{ post.post }}">{{ post.title }}</a></li>
                             {% endfor %}
                         </ul>
                     {% endif %}

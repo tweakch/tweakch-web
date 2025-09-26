@@ -10,12 +10,13 @@ Use php-fpm php84
 
 # URL Rewrites to fix the failing workflow smoketests
 RewriteEngine On
+Options -MultiViews
+RewriteBase /
 
-# Blog post clean URLs: /blog/post-slug -> /blog.php?post=post-slug
-RewriteRule ^blog/([a-z0-9-]+)/?$ blog.php?post=$1 [QSA,L]
-
-# Portfolio clean URLs (if needed in future): /portfolio/slug -> /portfolio.php?post=slug
-# RewriteRule ^portfolio/([a-z0-9-]+)/?$ portfolio.php?post=$1 [QSA,L]
+# Front controller: send everything else to index.php (unless a real file)
+RewriteCond %{REQUEST_URI} !^/index\.php$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
 
 # Security: Block access to sensitive files
 <FilesMatch "\.(md|yml|yaml|json|lock|txt|log|env)$">

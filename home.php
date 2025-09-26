@@ -35,8 +35,8 @@ $contentService = new BlogContentService();
 $blogService = new BlogService($contentService);
 $portfolioService = new PortfolioService($contentService);
 
-$blogDir = __DIR__ . '/blog';
-$portfolioDir = __DIR__ . '/portfolio';
+$blogDir = __DIR__ . '/data/blog';
+$portfolioDir = __DIR__ . '/data/portfolio';
 
 // Dynamic featured portfolio projects
 $portfolioItems = $portfolioService->getFeaturedProjects($portfolioDir);
@@ -57,7 +57,7 @@ $blogPosts = array_map(function ($p) {
         'img' => 'pic08.jpg', // placeholder image until metadata supports it
         'title' => $p['title'],
         'time' => $p['published'],
-        'link' => 'blog.php?post=' . urlencode($p['post']),
+        'link' => 'blog?post=' . urlencode($p['post']),
         'comments' => 0,
         'desc' => $p['description'],
         'post' => $p['post'],

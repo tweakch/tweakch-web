@@ -1,5 +1,5 @@
 ---
-title: Turning Podcasts into Text: A Weekend Project with Open-Source Tools
+title: Tweakend Project: Turning Podcasts into Text
 description: Build a lightweight, self-hosted podcast transcription tool in a weekend using ffmpeg, Whisper/faster-whisper, and a tiny FastAPI backend—what matters, pitfalls to avoid, and how to iterate.
 author: tweakch
 published: 2025-09-24

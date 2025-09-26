@@ -1,13 +1,30 @@
 <?php
-/**
- * Modern Router for the Site
- * Handles all incoming requests and routes them to appropriate handlers
- */
-
 // Start output buffering and session
 ob_start();
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+}
+
+// Router logging toggle: enable with env ROUTER_LOG=1 or query ?__rlog=1
+$__ROUTER_LOG_ENABLED = (getenv('ROUTER_LOG') === '1') || (isset($_GET['__rlog']) && $_GET['__rlog'] === '1');
+if ($__ROUTER_LOG_ENABLED) {
+    // Log a one-liner at request start
+    error_log('[router] request.start ' . json_encode([
+        'method' => $_SERVER['REQUEST_METHOD'] ?? '',
+        'uri' => $_SERVER['REQUEST_URI'] ?? '',
+        'host' => $_SERVER['HTTP_HOST'] ?? ($_SERVER['SERVER_NAME'] ?? ''),
+        'remote' => $_SERVER['REMOTE_ADDR'] ?? '',
+        'script' => $_SERVER['SCRIPT_NAME'] ?? ''
+    ]));
+    // At shutdown, log response code and headers actually sent
+    register_shutdown_function(function () {
+        $code = http_response_code();
+        $headers = function_exists('headers_list') ? headers_list() : [];
+        error_log('[router] request.end ' . json_encode([
+            'status' => $code,
+            'headers' => $headers
+        ]));
+    });
 }
 
 /**
@@ -17,10 +34,28 @@ class Router
 {
     private $routes = [];
     private $basePath = '';
+    private static $loggingEnabled = false;
 
     public function __construct($basePath = '')
     {
         $this->basePath = rtrim($basePath, '/');
+    }
+
+    public static function setLoggingEnabled(bool $enabled): void
+    {
+        self::$loggingEnabled = $enabled;
+    }
+
+    private function log(string $event, array $context = []): void
+    {
+        if (!self::$loggingEnabled) return;
+        // Keep logs compact and safe
+        foreach ($context as $k => $v) {
+            if (is_string($v) && strlen($v) > 512) {
+                $context[$k] = substr($v, 0, 512) . '…';
+            }
+        }
+        error_log('[router] ' . $event . ' ' . json_encode($context));
     }
 
     /**
@@ -48,7 +83,13 @@ class Router
             $uri = substr($uri, strlen($this->basePath));
         }
         
-        return rtrim($uri, '/') ?: '/';
+        $normalized = rtrim($uri, '/') ?: '/';
+        $this->log('uri.normalized', [
+            'raw' => $_SERVER['REQUEST_URI'] ?? '',
+            'normalized' => $normalized,
+            'basePath' => $this->basePath,
+        ]);
+        return $normalized;
     }
 
     /**
@@ -57,15 +98,22 @@ class Router
     public function route()
     {
         $uri = $this->getCurrentUri();
+        $this->log('route.start', [
+            'method' => $_SERVER['REQUEST_METHOD'] ?? '',
+            'uri' => $uri,
+            'host' => $_SERVER['HTTP_HOST'] ?? '',
+        ]);
         
         // Handle static assets first (CSS, JS, images, fonts, etc.)
         if ($this->isStaticAsset($uri)) {
             $filePath = __DIR__ . $uri;
             if (file_exists($filePath) && is_file($filePath)) {
+                $this->log('static.serve', ['uri' => $uri, 'path' => $filePath]);
                 $this->serveStaticFile($filePath);
                 return;
             } else {
                 // Static file not found
+                $this->log('static.miss', ['uri' => $uri, 'path' => $filePath]);
                 http_response_code(404);
                 return;
             }
@@ -73,17 +121,20 @@ class Router
         
         // Check for exact matches first
         if (isset($this->routes[$uri])) {
+            $this->log('route.exact', ['uri' => $uri, 'handler' => $this->routes[$uri]]);
             return $this->executeHandler($this->routes[$uri], []);
         }
         
         // Check for pattern matches
         foreach ($this->routes as $pattern => $handler) {
             if ($this->matchPattern($pattern, $uri, $matches)) {
+                $this->log('route.match', ['pattern' => $pattern, 'uri' => $uri, 'handler' => is_string($handler) ? $handler : 'callable']);
                 return $this->executeHandler($handler, $matches);
             }
         }
         
         // No route found - 404
+        $this->log('route.404', ['uri' => $uri]);
         $this->handle404();
     }
 
@@ -133,7 +184,8 @@ class Router
         $extension = strtolower($pathInfo['extension'] ?? '');
         $mimeType = $mimeTypes[$extension] ?? 'application/octet-stream';
         
-        header('Content-Type: ' . $mimeType);
+    $this->log('static.headers', ['contentType' => $mimeType, 'file' => $filePath]);
+    header('Content-Type: ' . $mimeType);
         header('Content-Length: ' . filesize($filePath));
         
         // Add cache headers for better performance
@@ -176,15 +228,21 @@ class Router
                 }
                 
                 // Include the target handler
+                $this->log('handler.include', [
+                    'file' => $handler,
+                    'params' => $GLOBALS['route_params'] ?? [],
+                ]);
                 include __DIR__ . '/' . $handler;
                 
                 // Restore original script name
                 $_SERVER['SCRIPT_NAME'] = $originalScriptName;
             } else {
+                $this->log('handler.missing', ['file' => $handler]);
                 $this->handle404();
             }
         } elseif (is_callable($handler)) {
             // Callable function
+            $this->log('handler.callable', ['params' => array_slice($matches, 1)]);
             call_user_func_array($handler, array_slice($matches, 1));
         }
     }
@@ -198,6 +256,7 @@ class Router
         
         // Check if we have a custom 404 page
         if (file_exists(__DIR__ . '/404.php')) {
+            $this->log('handler.include', ['file' => '404.php']);
             include __DIR__ . '/404.php';
         } else {
             // Default 404 response - simple HTML without including config
@@ -208,6 +267,7 @@ class Router
 
 // Initialize router
 $router = new Router();
+Router::setLoggingEnabled($__ROUTER_LOG_ENABLED);
 
 // Define routes
 $router->add('/', 'home.php');                                    // Homepage

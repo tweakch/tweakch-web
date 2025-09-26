@@ -1,6 +1,6 @@
 ---
-title: Building a Modern PHP API as a .NET Developer
-description: A practical migration mindset for .NET engineers designing clean, testable PHP APIs.
+title: Tweakend Project: Building a PHP API as a .NET Developer
+description: A practical migration mindset for software engineers designing clean, testable PHP APIs. I tried to avoid unnecessary complexity and use best practices from both PHP and .NET ecosystems. 
 author: alex
 published: 2025-09-23
 tags: php, api, architecture, migration
